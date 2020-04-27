@@ -1,3 +1,3 @@
 # Tesis
 
-![pgd](pgd.png)
+![pgd](PGD.png)
