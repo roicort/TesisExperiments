@@ -1,0 +1,17 @@
+2_1edge 893
+2_indep 198503
+3_tris 328
+2_star 61718
+3_1edge 438170
+3_indep 41372944
+4_clique 122
+4_chordcycle 4392
+4_tailed_tris 34598
+4_cycle 256
+3_star 4836584
+4_path 35704
+4_1edge 112836117
+4_2edge 255612
+4_2star 24160458
+4_tri 162442
+4_indep 6442228125
