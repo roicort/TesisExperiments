@@ -1,4 +1,4 @@
-# PDG Embedding 
+# PDG 
 
 * graph2edges.py - Convierte del archivo original a lista de aristas.
 * pgd.py - Script de python que llama PDG en C++.
