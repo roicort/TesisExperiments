@@ -1,4 +1,4 @@
-# PDG 
+# PGD 
 
 * main.py - Pipeline 
 * graph2edges.py - Convierte del archivo original a lista de aristas.
