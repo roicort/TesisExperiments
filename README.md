@@ -11,7 +11,7 @@ Social networks exploration via graph-level clustering with embeddings
 
 * Added visualization
 
-### Current Roadmap
+### Roadmap
 
 * Fix duplicates
 * Use motifs 
