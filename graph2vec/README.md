@@ -6,5 +6,5 @@
 * Data - Contiene gráfos en listas de aristas.
 * Results - Contiene los embeddings obtenidos con PGD.
 
-![g2v](GV2.png)
+![g2v](G2V.png)
 
