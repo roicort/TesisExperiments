@@ -4,27 +4,27 @@ Social networks exploration via graph-level clustering with embeddings
 
 ## Structure
 
+* Abstract
+
 * Introducción
-    * Item 3a
-    * Item 3b
-    * Item 3c
+    * Problema
+    * Objetivos
+    * Solución
 
 * Conceptos Básicos
-    * Item 3a
-    * Item 3b
-    * Item 3c
+    * Gráfo
+    * Datos
 
 * Algoritmos para embeddings
-    * Item 3a
-    * Item 3b
-    * Item 3c
+    * GNN
+    * G2V
+    * PGD
 
 * Algoritmos para clustering
-    * Item 3a
-    * Item 3b
-    * Item 3c
+    * Jerárquico
 
 * Algoritmos para reducción de dimensionalidad
-    * Item 3a
-    * Item 3b
-    * Item 3c
+    * TSNE
+    
+ * Resultados
+    * Cosas intersantes (no sé) 
