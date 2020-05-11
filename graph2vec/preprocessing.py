@@ -97,6 +97,7 @@ def graph2json(read_path,save_path):
 
         Edges = Edges.loc[Edges['Relationship'] != "Tweet"]    
         Edges = Edges.loc[Edges['Vertex 1'] != Edges['Vertex 2']]
+        Edges = Edges.drop_duplicates()
 
         nodessss = list(Edges['Vertex 1'])+list(Edges['Vertex 2'])
         activenodes = set(nodessss)
@@ -166,13 +167,15 @@ def graph2json(read_path,save_path):
         'Custom Menu Item Text',
         'Custom Menu Item Action',
         'Tweeted Search Term?'])
+        Nodes.drop_duplicates()
 
         Nodes = Nodes[Nodes["Vertex"].isin(keys)]
         Nodes["ID"] = Nodes['Vertex'].replace(nodesdict, inplace=False)
         features = {} 
         for _, node in Nodes.iterrows():
-            features[node["ID"]]=int(node["Followers"])
+            features[node["ID"]]=int(node["ID"])
         JSON["features"] = features
+
         with open(save_path+name+'.json', 'w') as outfile:
            json.dump(JSON, outfile)
         os.system('clear')

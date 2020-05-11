@@ -40,7 +40,7 @@ def clustering(read_path):
 
     Z = hierarchy.linkage(X, 'ward')
     hierarchy.set_link_color_palette(['#03396C','#17BEBB','#C82B38','#FFC914','#562999','#76B041'])
-    hierarchy.dendrogram(Z,labels = names, orientation="left", color_threshold=11, above_threshold_color='grey', p=12,leaf_font_size=2)
+    hierarchy.dendrogram(Z,labels = names, orientation="left", color_threshold=2, above_threshold_color='grey', p=12,leaf_font_size=2)
     plt.title('Model: G2V')
     plt.savefig("G2V.png",dpi=1000)
 

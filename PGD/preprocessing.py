@@ -95,6 +95,7 @@ def graph2edges(read_path,save_path):
 
         Edges = Edges.loc[Edges['Relationship'] != "Tweet"]    
         Edges = Edges.loc[Edges['Vertex 1'] != Edges['Vertex 2']]
+        Edges = Edges.drop_duplicates()
 
         nodessss = list(Edges['Vertex 1'])+list(Edges['Vertex 2'])
         activenodes = set(nodessss)
@@ -106,7 +107,7 @@ def graph2edges(read_path,save_path):
         savedf['Source'] = Edges['Vertex 1'].replace(nodesdict, inplace=False)
         savedf['Target'] = Edges['Vertex 2'].replace(nodesdict, inplace=False)
 
-        savedf.to_csv(save_path+name+'.edges', index=False,sep=" ",header=False)
+        savedf.to_csv(save_path+name.replace(" ","_")+'.edges', index=False,sep=" ",header=False)
 
         """
         Nodes = pd.read_excel(path,sheet_name="Vertices",header=1)

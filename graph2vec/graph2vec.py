@@ -16,13 +16,14 @@ from wasabi import msg
   --down-sampling  FLOAT        Down sampling rate for frequent features.         Default is 0.0001.
   """
 
-epochs = 100
+epochs = 1
 workers = 32
-mincount = 50
-wliterations = 20
+mincount = 5
+wliterations = 2
+dim = 128
 
 def rungraph2vec(read_path,save_path):
-    rung2v = "python src/graph2vec.py " + "--input-path " +read_path+" --output-path " + save_path+ "embeddings.csv "+ "--epochs " + str(epochs) +" --wl-iterations "+str(wliterations)+" --min-count "+str(mincount)+" --workers " + str(workers)
+    rung2v = "python src/graph2vec.py " + "--input-path " +read_path+" --output-path " + save_path+ "embeddings.csv "+" --dimensions "+str(dim)+" --epochs " + str(epochs) +" --wl-iterations "+str(wliterations)+" --min-count "+str(mincount)+" --workers " + str(workers)
     msg.info(rung2v)
     os.system(rung2v)
     return "Done"

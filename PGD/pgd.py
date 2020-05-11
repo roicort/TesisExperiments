@@ -21,7 +21,7 @@ def runpgd(read_path,save_path):
     for file in tqdm(range(len(files))):
         path = files[file][0]
         name = files[file][1]
-        runpgd = "pgd/./pgd " +"-f "+path+" --counts "+save_path+name+".graphlets" + " --algorithm exact"
+        runpgd = "src/./pgd " +"-f "+path+" --counts "+save_path+name+".graphlets" + " --algorithm exact"
         os.system(runpgd)
         os.system("clear")
         msg.info(runpgd)
