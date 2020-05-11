@@ -14,3 +14,4 @@ Graph exploration via graph clustering with embeddings
 ## Current Roadmap
 
 * Fix Duplicates
+* Use motifs 
