@@ -2,16 +2,16 @@
 
 Social networks exploration via graph-level clustering with embeddings
 
-## Contents
+### Contents
 * [Escrito](Writting/README.md)
 * [PGD Clustering](PGD/README.md)
 * [G2V Clustering](graph2vec/README.md)
 
-## Changelog
+### Changelog
 
 * Added visualization
 
-## Current Roadmap
+### Current Roadmap
 
 * Fix duplicates
 * Use motifs 
