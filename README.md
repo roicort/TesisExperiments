@@ -1,6 +1,6 @@
 # Tesis
 
-Graph exploration via graph clustering with embeddings
+Social networks exploration via graph clustering with embeddings
 
 ## Contents
 
