@@ -17,7 +17,6 @@ def runpgd(read_path,save_path):
     print("")
     files.sort()
 
-
     for file in tqdm(range(len(files))):
         path = files[file][0]
         name = files[file][1]

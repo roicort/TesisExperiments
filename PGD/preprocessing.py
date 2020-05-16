@@ -6,6 +6,7 @@ import scipy as sc
 import json
 from wasabi import msg
 import pickle
+import networkx as nx
 
 def graph2edges(read_path,save_path):
 
@@ -15,8 +16,8 @@ def graph2edges(read_path,save_path):
 
     for r, _, f in os.walk(read_path):
         for file in f:
-            if '.xlsx' in file:
-                files.append([os.path.join(r, file),file.replace(".xlsx","")])
+            if '.graphml' in file:
+                files.append([os.path.join(r, file),file.replace(".graphml","")])
     print("")
     files.sort()
 
@@ -31,147 +32,16 @@ def graph2edges(read_path,save_path):
         msg.info("Parsing: "+ str(name))
         print("\n")
 
-        Edges = pd.read_excel(path,sheet_name="Edges",header=1)
-        Edges = Edges.drop(columns=[#'Vertex 1',
-        #'Vertex 2',
-        'Color',
-        'Width',
-        'Style',
-        'Opacity',
-        'Visibility',
-        'Label',
-        'Label Text Color',
-        'Label Font Size',
-        'Reciprocated?',
-        'ID',
-        'Dynamic Filter',
-        'Add Your Own Columns Here',
-        #'Relationship',
-        'Relationship Date (UTC)',
-        'Tweet',
-        'URLs in Tweet',
-        'Domains in Tweet',
-        'Hashtags in Tweet',
-        'Media in Tweet',
-        'Tweet Image File',
-        'Tweet Date (UTC)',
-        'Date',
-        'Time',
-        'Twitter Page for Tweet',
-        'Latitude',
-        'Longitude',
-        'Imported ID',
-        'In-Reply-To Tweet ID',
-        'Favorited',
-        'Favorite Count',
-        'In-Reply-To User ID',
-        'Is Quote Status',
-        'Language',
-        'Possibly Sensitive',
-        'Quoted Status ID',
-        'Retweeted',
-        'Retweet Count',
-        'Retweet ID',
-        'Source',
-        'Truncated',
-        'Unified Twitter ID',
-        'Imported Tweet Type',
-        'Added By Extended Analysis',
-        'Corrected By Extended Analysis',
-        'Place Bounding Box',
-        'Place Country',
-        'Place Country Code',
-        'Place Full Name',
-        'Place ID',
-        'Place Name',
-        'Place Type',
-        'Place URL'])
+        G = nx.read_graphml(path)
+        G = nx.convert_node_labels_to_integers(G)
+        Edges = nx.to_pandas_edgelist(G,source="Source", target="Target")
 
-        #Edges['Relationship Date (UTC)'] = Edges['Relationship Date (UTC)'].map(lambda element: str(element.to_pydatetime()))
-        #Edges['Tweet Date (UTC)'] = Edges['Tweet Date (UTC)'].map(lambda element: str(element.to_pydatetime()))
-        #Edges['Date'] = Edges['Date'].map(lambda element: str(element.to_pydatetime()))
-        #Edges['URLs in Tweet'] = Edges['URLs in Tweet'].map(lambda element: str(element))
-        #print(Edges.dtypes)
-
-        Edges = Edges.loc[Edges['Relationship'] != "Tweet"]    
-        Edges = Edges.loc[Edges['Vertex 1'] != Edges['Vertex 2']]
-        Edges = Edges.drop_duplicates()
-
-        nodessss = list(Edges['Vertex 1'])+list(Edges['Vertex 2'])
-        activenodes = set(nodessss)
-        keys = sorted(activenodes)
-        values = list(range(len(keys)))
-        nodesdict = dict(zip(keys, values))
-
-        savedf = pd.DataFrame()
-        savedf['Source'] = Edges['Vertex 1'].replace(nodesdict, inplace=False)
-        savedf['Target'] = Edges['Vertex 2'].replace(nodesdict, inplace=False)
-
-        savedf.to_csv(save_path+name.replace(" ","_")+'.edges', index=False,sep=" ",header=False)
-
-        """
-        Nodes = pd.read_excel(path,sheet_name="Vertices",header=1)
-        Nodes = Nodes.drop(columns=[#'Vertex',
-        'Color',
-        'Shape',
-        'Size',
-        'Opacity',
-        'Image File',
-        'Visibility',
-        'Label',
-        'Label Fill Color',
-        'Label Position',
-        'Tooltip',
-        'Layout Order',
-        'X',
-        'Y',
-        'Locked?',
-        'Polar R',
-        'Polar Angle',
-        'Degree',
-        'In-Degree',
-        'Out-Degree',
-        'Betweenness Centrality',
-        'Closeness Centrality',
-        'Eigenvector Centrality',
-        'PageRank',
-        'Clustering Coefficient',
-        'Reciprocated Vertex Pair Ratio',
-        'ID',
-        'Dynamic Filter',
-        'Add Your Own Columns Here',
-        'Name',
-        #'Followed',
-        #'Followers',
-        #'Tweets',
-        'Favorites',
-        'Time Zone UTC Offset (Seconds)',
-        'Description',
-        'Location',
-        'Web',
-        'Time Zone',
-        'Joined Twitter Date (UTC)',
-        'Profile Banner Url',
-        'Default Profile',
-        'Default Profile Image',
-        'Geo Enabled',
-        'Language',
-        'Listed Count',
-        'Profile Background Image Url',
-        'Verified',
-        'Custom Menu Item Text',
-        'Custom Menu Item Action',
-        'Tweeted Search Term?'])
-
-        Nodes = Nodes[Nodes["Vertex"].isin(keys)]
-        Nodes["ID"] = Nodes['Vertex'].replace(nodesdict, inplace=False)
+        Edges['Source'] = Edges['Source'].astype(str)
+        Edges['Target']= Edges['Target'].astype(str)
         
-        JSON = {}
-        for _, node in Nodes.iterrows():
-            JSON[node["ID"]]=[node["Followed"],node["Followers"],node["Tweets"]]
-        with open('input/features/'+name+'_features.json', 'w') as outfile:
-            json.dump(JSON, outfile)
-        """
+        Edges = Edges.sort_values(by=['Source', 'Target'],ascending=True)
+        Edges.to_csv(save_path+name.replace(" ","_")+'.edges', columns=['Source','Target'],index=False,sep=" ",header=False)
+
         os.system('clear')
         print('\n\n')
         
