@@ -20,7 +20,7 @@ def graph2pickle(read_path,save_path):
     files.sort()
 
     #-----------------------------------------------
-    dictnames = {}
+
     for file in tqdm(range(len(files))):
 
         path = files[file][0]

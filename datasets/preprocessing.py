@@ -158,7 +158,7 @@ def excel2networkx(read_path,save_path):
         file2save = save_path+name+".graphml"
 
         nx.write_graphml(G,file2save)
-        newG = nx.read_graphml(file2save)
+        #newG = nx.read_graphml(file2save)
 
         #tests = [nx.get_edge_attributes(G,"Relationship")==nx.get_edge_attributes(G,"Relationship"),nx.get_node_attributes(G,"Followed")==nx.get_node_attributes(newG,"Followed"),nx.get_node_attributes(G,"Followers")==nx.get_node_attributes(newG,"Followers"),nx.get_node_attributes(G,"Tweets")==nx.get_node_attributes(G,"Tweets"),G.edges==newG.edges,sorted(G.nodes)==sorted(newG.nodes)]
         

@@ -1,0 +1,85 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    
+      <meta charset="utf-8">
+      <title>Bokeh Plot</title>
+      
+      
+        
+          
+        
+        
+          
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.2.min.js" integrity="sha384-ufR9RFnRs6lniiaFvtJziE0YeidtAgBRH6ux2oUItHw5WTvE1zuk9uzhUU/FJXDp" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            Bokeh.set_log_level("info");
+        </script>
+        
+      
+      
+    
+  </head>
+  
+  
+  <body>
+    
+      
+        
+          
+          
+            
+              <div class="bk-root" id="ee1eb84c-cdbd-4115-b634-962deedeb3b4" data-root-id="1427"></div>
+            
+          
+        
+      
+      
+        <script type="application/json" id="1564">
+          {"3dcceb90-29ab-4a57-badf-c8d183064442":{"roots":{"references":[{"attributes":{"source":{"id":"1424"}},"id":"1467","type":"CDSView"},{"attributes":{"axis":{"id":"1438"},"ticker":null},"id":"1441","type":"Grid"},{"attributes":{},"id":"1436","type":"LinearScale"},{"attributes":{"data_source":{"id":"1424"},"glyph":{"id":"1464"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1465"},"selection_glyph":null,"view":{"id":"1467"}},"id":"1466","type":"GlyphRenderer"},{"attributes":{},"id":"1448","type":"WheelZoomTool"},{"attributes":{},"id":"1450","type":"ResetTool"},{"attributes":{"fill_color":{"field":"y","transform":{"id":"1426"}},"line_color":{"value":"#1f77b4"},"size":{"units":"screen","value":10},"x":{"field":"x"},"y":{"field":"y"}},"id":"1464","type":"Circle"},{"attributes":{},"id":"1432","type":"DataRange1d"},{"attributes":{},"id":"1472","type":"BasicTickFormatter"},{"attributes":{"formatter":{"id":"1470"},"ticker":{"id":"1439"}},"id":"1438","type":"LinearAxis"},{"attributes":{},"id":"1439","type":"BasicTicker"},{"attributes":{},"id":"1470","type":"BasicTickFormatter"},{"attributes":{},"id":"1447","type":"PanTool"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"field":"y","transform":{"id":"1426"}},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"size":{"units":"screen","value":10},"x":{"field":"x"},"y":{"field":"y"}},"id":"1465","type":"Circle"},{"attributes":{"callback":null},"id":"1451","type":"TapTool"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1425"},{"id":"1446"},{"id":"1447"},{"id":"1448"},{"id":"1449"},{"id":"1450"},{"id":"1451"},{"id":"1452"}]},"id":"1454","type":"Toolbar"},{"attributes":{},"id":"1446","type":"CrosshairTool"},{"attributes":{"text":"TSNE-NetLSD"},"id":"1428","type":"Title"},{"attributes":{"formatter":{"id":"1472"},"ticker":{"id":"1443"}},"id":"1442","type":"LinearAxis"},{"attributes":{},"id":"1474","type":"Selection"},{"attributes":{"below":[{"id":"1438"}],"center":[{"id":"1441"},{"id":"1445"}],"left":[{"id":"1442"}],"renderers":[{"id":"1466"}],"title":{"id":"1428"},"toolbar":{"id":"1454"},"x_range":{"id":"1430"},"x_scale":{"id":"1434"},"y_range":{"id":"1432"},"y_scale":{"id":"1436"}},"id":"1427","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"1443","type":"BasicTicker"},{"attributes":{"bottom_units":"screen","fill_alpha":0.5,"fill_color":"lightgrey","left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1453","type":"BoxAnnotation"},{"attributes":{},"id":"1430","type":"DataRange1d"},{"attributes":{"axis":{"id":"1442"},"dimension":1,"ticker":null},"id":"1445","type":"Grid"},{"attributes":{"overlay":{"id":"1453"}},"id":"1449","type":"BoxZoomTool"},{"attributes":{},"id":"1475","type":"UnionRenderers"},{"attributes":{"callback":null,"tooltips":[["index","$index"],["title","@title"],["(x,y)","(@x, @y)"]]},"id":"1425","type":"HoverTool"},{"attributes":{"high":38.59617233276367,"low":-31.023725509643555,"palette":["#440154","#440255","#440357","#450558","#45065A","#45085B","#46095C","#460B5E","#460C5F","#460E61","#470F62","#471163","#471265","#471466","#471567","#471669","#47186A","#48196B","#481A6C","#481C6E","#481D6F","#481E70","#482071","#482172","#482273","#482374","#472575","#472676","#472777","#472878","#472A79","#472B7A","#472C7B","#462D7C","#462F7C","#46307D","#46317E","#45327F","#45347F","#453580","#453681","#443781","#443982","#433A83","#433B83","#433C84","#423D84","#423E85","#424085","#414186","#414286","#404387","#404487","#3F4587","#3F4788","#3E4888","#3E4989","#3D4A89","#3D4B89","#3D4C89","#3C4D8A","#3C4E8A","#3B508A","#3B518A","#3A528B","#3A538B","#39548B","#39558B","#38568B","#38578C","#37588C","#37598C","#365A8C","#365B8C","#355C8C","#355D8C","#345E8D","#345F8D","#33608D","#33618D","#32628D","#32638D","#31648D","#31658D","#31668D","#30678D","#30688D","#2F698D","#2F6A8D","#2E6B8E","#2E6C8E","#2E6D8E","#2D6E8E","#2D6F8E","#2C708E","#2C718E","#2C728E","#2B738E","#2B748E","#2A758E","#2A768E","#2A778E","#29788E","#29798E","#287A8E","#287A8E","#287B8E","#277C8E","#277D8E","#277E8E","#267F8E","#26808E","#26818E","#25828E","#25838D","#24848D","#24858D","#24868D","#23878D","#23888D","#23898D","#22898D","#228A8D","#228B8D","#218C8D","#218D8C","#218E8C","#208F8C","#20908C","#20918C","#1F928C","#1F938B","#1F948B","#1F958B","#1F968B","#1E978A","#1E988A","#1E998A","#1E998A","#1E9A89","#1E9B89","#1E9C89","#1E9D88","#1E9E88","#1E9F88","#1EA087","#1FA187","#1FA286","#1FA386","#20A485","#20A585","#21A685","#21A784","#22A784","#23A883","#23A982","#24AA82","#25AB81","#26AC81","#27AD80","#28AE7F","#29AF7F","#2AB07E","#2BB17D","#2CB17D","#2EB27C","#2FB37B","#30B47A","#32B57A","#33B679","#35B778","#36B877","#38B976","#39B976","#3BBA75","#3DBB74","#3EBC73","#40BD72","#42BE71","#44BE70","#45BF6F","#47C06E","#49C16D","#4BC26C","#4DC26B","#4FC369","#51C468","#53C567","#55C666","#57C665","#59C764","#5BC862","#5EC961","#60C960","#62CA5F","#64CB5D","#67CC5C","#69CC5B","#6BCD59","#6DCE58","#70CE56","#72CF55","#74D054","#77D052","#79D151","#7CD24F","#7ED24E","#81D34C","#83D34B","#86D449","#88D547","#8BD546","#8DD644","#90D643","#92D741","#95D73F","#97D83E","#9AD83C","#9DD93A","#9FD938","#A2DA37","#A5DA35","#A7DB33","#AADB32","#ADDC30","#AFDC2E","#B2DD2C","#B5DD2B","#B7DD29","#BADE27","#BDDE26","#BFDF24","#C2DF22","#C5DF21","#C7E01F","#CAE01E","#CDE01D","#CFE11C","#D2E11B","#D4E11A","#D7E219","#DAE218","#DCE218","#DFE318","#E1E318","#E4E318","#E7E419","#E9E419","#ECE41A","#EEE51B","#F1E51C","#F3E51E","#F6E61F","#F8E621","#FAE622","#FDE724"]},"id":"1426","type":"LinearColorMapper"},{"attributes":{},"id":"1434","type":"LinearScale"},{"attributes":{},"id":"1452","type":"SaveTool"},{"attributes":{"data":{"title":["#25DeNoviembre","#AMAs","#AMLOHundeAMexico","#AdiosInterjet","#ChampionsLeague","#CocaColaFlowFest","#ColdplayJordan","#ConMisHijosNoTeMetas","#Cybertruck","#DiaDelMusico","#DiaInternacionalDelHombre","#D\u00edaNaranja","#FelizDomingo","#FelizJueves","#FelizLunes","#FelizMartes","#FelizSabado","#FreddieMercury","#FueElEstado","#FueraAntorchaCampesina","#HastaLaMadreDeLosPANISTAS","#JavierSiciliaNOmeRepresenta","#LivingProofVideo","#LordCafe","#MarchaFeminista","#NFLMX","#NiUnaMenos","#PerfecTourCDMX","#PerfecTourGuadalajara","#RevolucionMexicana","#TheGreatestMatch","#ThisIsBTS","#TimeForOBSESSION","#ViolenciaContraLaMujer","#ViveLatino2020","#WeSeeWonho","#WonhoBelongsToMX","#lavozkidsmx","#netflixdown","Aerom\u00e9xico","Atlas","Ayotzinapa","Brozo","Guns N","Hawaii","K-pop","Real Madrid","Santa Cecilia","Tottenham","Trump"],"x":[-66.17188262939453,1.5893301963806152,20.820594787597656,46.477142333984375,-35.741092681884766,63.460838317871094,43.26136779785156,24.556941986083984,-19.26858139038086,-70.87158966064453,-64.65973663330078,-52.10431671142578,-77.23262023925781,-47.724151611328125,-58.624027252197266,-55.055477142333984,-60.381919860839844,-27.612424850463867,13.196417808532715,36.96460723876953,40.612525939941406,51.536094665527344,30.529123306274414,31.792028427124023,-12.640438079833984,-6.77009916305542,-72.70285034179688,59.775840759277344,60.23582077026367,-30.093469619750977,37.04265594482422,23.84008026123047,28.457805633544922,-58.34242248535156,12.536749839782715,46.41554260253906,49.10939407348633,54.67576599121094,0.6770430207252502,-2.818061590194702,-40.344451904296875,15.786941528320312,9.144898414611816,34.51076126098633,67.90374755859375,-22.81755256652832,-42.17835998535156,-51.54242706298828,-34.69587707519531,-46.52232360839844],"y":[-24.42079734802246,0.8793069124221802,14.000083923339844,33.14800262451172,-9.271784782409668,18.129037857055664,15.149611473083496,26.28069305419922,9.827954292297363,11.143889427185059,-0.6237905621528625,-0.3270411789417267,-1.3659926652908325,-10.035521507263184,21.000167846679688,-19.48175621032715,-10.209312438964844,0.8659738302230835,-10.566117286682129,25.028968811035156,5.40327262878418,21.482973098754883,-16.252687454223633,14.79802131652832,-1.75230073928833,9.35496711730957,-13.375080108642578,31.38897132873535,-6.344380855560303,-21.273630142211914,-5.205428600311279,-5.799251556396484,4.368854522705078,8.884574890136719,25.64557647705078,-14.303531646728516,-1.5640989542007446,8.752660751342773,22.37361717224121,-10.130688667297363,1.1857788562774658,2.3613123893737793,11.478841781616211,38.59617233276367,5.351924896240234,-10.367430686950684,-20.75779914855957,-31.023725509643555,12.871624946594238,12.293903350830078]},"selected":{"id":"1474"},"selection_policy":{"id":"1475"}},"id":"1424","type":"ColumnDataSource"}],"root_ids":["1427"]},"title":"Bokeh Application","version":"2.0.2"}}
+        </script>
+        <script type="text/javascript">
+          (function() {
+            var fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  var docs_json = document.getElementById('1564').textContent;
+                  var render_items = [{"docid":"3dcceb90-29ab-4a57-badf-c8d183064442","root_ids":["1427"],"roots":{"1427":"ee1eb84c-cdbd-4115-b634-962deedeb3b4"}}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    var attempts = 0;
+                    var timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        clearInterval(timer);
+                        embed_document(root);
+                      } else {
+                        attempts++;
+                        if (attempts > 100) {
+                          clearInterval(timer);
+                          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                        }
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+    
+  </body>
+  
+</html>
