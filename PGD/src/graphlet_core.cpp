@@ -1835,6 +1835,14 @@ void graphlet_core::print_micro_stats(bool output_id, string delim) {
      myfile.close();
  }
 
+ void graphlet_core::write_GFD(string filename) {
+     ofstream myfile;
+     char *fn = (char*)filename.c_str();
+     myfile.open(fn);
+     myfile << compute_GFD();
+     myfile.close();
+ }
+
 /**
  * @brief Sort the neighbors of each vertex (in CSC/CSR)
  *

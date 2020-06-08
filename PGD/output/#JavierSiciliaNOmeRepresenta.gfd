@@ -1,0 +1,68 @@
+[reading generic edge list: read_edge_list func]  filename: input/#JavierSiciliaNOmeRepresenta.edges
+|V|: 1769
+|E|: 2879
+p: 0.00184103
+d_max: 927
+d_avg: 3
+r = -0.290401
+K = 9
+************************************************************
+total_2_1edge = 2879
+total_2_indep = 1560917
+----------------------------------------
+total_3_tris = 911
+total_2_star = 514738
+total_3_1edge = 4054984
+total_3_indep = 916505211
+----------------------------------------
+total_4_clique = 165
+total_4_chordcycle = 20457
+total_4_tailed_tris = 133398
+total_4_cycle = 16306
+total_3_star = 135821205
+total_4_path = 930360
+----------------------------------------
+total_4_1edge = 3073097731
+total_4_2edge = 2487631
+total_4_2star = 499330039
+total_4_tri = 1433854
+total_4_indep = 402941713980
+************************************************************
+graphlet decomposition time: 0.00507402 sec
+--------------------------------------------------------------------------------
+Graphlet Frequency Distribution (GFD)
+--------------------------------------------------------------------------------
+4-clique     	4.05749e-10
+4-chordal-cycle	5.03055e-08
+4-tailed-tri	3.28037e-07
+4-cycle       	4.00979e-08
+3-star       	0.000333996
+4-path       	2.28784e-06
+4-node-1-tri   	3.52597e-06
+4-node-2-star  	0.0012279
+4-node-2-edge	6.1173e-06
+4-node-1-edge  	0.00755701
+4-node-indep  	0.990869
+
+
+--------------------------------------------------------------------------------
+Connected Motif Graphlet Frequency Distribution (GFD)
+--------------------------------------------------------------------------------
+4-clique     	1.20507e-06
+4-chordal-cycle	0.000149406
+4-tailed-tri	0.000974263
+4-cycle       	0.00011909
+3-star       	0.991961
+4-path       	0.00679482
+
+
+--------------------------------------------------------------------------------
+Disconnected Motif Graphlet Frequency Distribution (GFD)
+--------------------------------------------------------------------------------
+4-node-1-tri   	3.52716e-06
+4-node-2-star	0.00122831
+4-node-2-edge  	6.11936e-06
+4-node-1-edge  	0.00755956
+4-node-indep  	0.991202
+
+

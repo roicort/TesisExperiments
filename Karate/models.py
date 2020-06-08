@@ -8,6 +8,40 @@ import pickle
 
 import time
 
+def size_only(read_path,save_path):
+    files = []
+
+    for r, _, f in os.walk(read_path):
+        for file in f:
+            if '.gpickle' in file:
+                files.append([os.path.join(r, file),file.replace(".gpickle","")])
+    print("")
+    files.sort()
+    
+    graphs = []
+    names = []
+    msg.info("Reading...")
+    for file in tqdm(range(len(files))):
+        path = files[file][0]
+        name = files[file][1]
+        G = nx.read_gpickle(path)
+        graphs.append(G)
+        names.append(name)
+    
+    embeddings = []
+
+    start_time = time.time()
+    for graph in graphs:
+        embeddings.append([graph.number_of_nodes(),graph.number_of_edges()])
+    end_time = time.time() - start_time
+
+    msg.info("Saving...")
+    data = dict(zip(names, embeddings))
+    with open(save_path+'size'+'.pickle', 'wb') as handle:
+        pickle.dump(data, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    return end_time
+
 def runG2Vec(read_path,save_path):
 
     files = []

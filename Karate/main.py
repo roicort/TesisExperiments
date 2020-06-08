@@ -7,18 +7,22 @@ from models import runSF
 from models import runNetLSD
 from models import runGL2Vec
 from models import runGeoScattering
+from models import size_only
 
 from plot import runPlot
 from clustering import clustering
 
 #data = graph2pickle('../datasets/twitter','input/')
 
+time = size_only('input/',"outputs/")
+
+"""
 logs = open("logs.txt", "a")
 time = runG2Vec('input/',"outputs/")
 print("G2V running time: %s" % time, file=logs)
 logs.close()
 
-"""logs = open("logs.txt", "a")
+logs = open("logs.txt", "a")
 time = runSF('input/',"outputs/")
 print("SF running time: %s" % time, file=logs)
 logs.close()
