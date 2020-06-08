@@ -7,7 +7,7 @@
 * Escrito
     * [Estructura](Writting/README.md)
 * Modelos
-    * [PGD Clustering](PGD/README.md)
+    * [GFD Clustering](PGD/README.md)
     * [SF Clustering](Karate/README.md)
     * [NetLSD Clustering](Karate/README.md)
     * [GL2Vec Clustering](Karate/README.md)
