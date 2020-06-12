@@ -22,4 +22,4 @@
 
 ### Roadmap
 
-    * Use motifs (Current Work)
+    * Comparing method
