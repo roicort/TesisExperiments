@@ -4,9 +4,9 @@
 
 ### Contents
 
-* Escrito
+* Writting
     * [Estructura](Writting/README.md)
-* Modelos
+* Models
     * [GFD Clustering](PGD/README.md)
     * [SF Clustering](Karate/README.md)
     * [NetLSD Clustering](Karate/README.md)
