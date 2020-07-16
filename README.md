@@ -16,6 +16,7 @@
  
 * Visualization
     * [Graphs](https://roicort.github.io/tesis/graphviz/)
+    * [ClusterMap GFD](viz/)
 
 ### Changelog
 
