@@ -40,7 +40,7 @@ def graph2edges(read_path,save_path):
         Edges['Target']= Edges['Target'].astype(str)
         
         Edges = Edges.sort_values(by=['Source', 'Target'],ascending=True)
-        Edges.to_csv(save_path+name.replace(" ","_")+'.edges', columns=['Source','Target'],index=False,sep=" ",header=False)
+        Edges.to_csv(save_path+name.replace(" ","_")+'.edges', columns=['Source','Target'],index=False,sep=" ",header=[])
 
         os.system('clear')
         print('\n\n')

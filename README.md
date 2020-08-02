@@ -13,10 +13,6 @@
     * [GL2Vec Clustering](Karate/README.md)
     * [GeoScattering Clustering](Karate/README.md)
     * [G2V Clustering](graph2vec/README.md)
- 
-* Visualization
-    * [Graphs](https://roicort.github.io/tesis/graphviz/)
-    * [ClusterMap GFD](viz/)
 
 ### Changelog
 

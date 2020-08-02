@@ -1,0 +1,17 @@
+------------------------------------------
+gtrieScanner (version 0.1)
+------------------------------------------
+Subgraph Size: 4
+Graph File: input/#DiaDelMusico.edges
+Directed, 8711 Nodes, 12780 Edges
+Method:     GTRIE with file containing complete g-trie
+
+Counting subgraph frequency on 'ORIGINAL NETWORK'
+Reading G-Trie
+Creation time: 0.00
+Compression rate = 71.98%
+
+134 subgraphs, 17131056 occurrences
+Time elapsed: 0.244060s
+
+Results written to file "output/#DiaDelMusico.txt"
