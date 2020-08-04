@@ -1,6 +1,6 @@
 # Tesis
 
-#### Social networks exploration via graph-level clustering with embeddings
+#### Social networks exploration
 
 ### Contents
 
