@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Visualisación
-nav_order: 2
+nav_order: 5
 has_children: false
 permalink: docs/viz
 ---

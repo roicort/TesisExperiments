@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Color
-parent: Experiments
+title: GeoScattering
+parent: Embeddings
 ---
 
 # Color Utilities

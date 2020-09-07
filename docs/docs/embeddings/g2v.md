@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Responsive Modifiers
-parent: Experiments
+title: Graph2Vec
+parent: Embeddings
 ---
 
 # Responsive modifiers

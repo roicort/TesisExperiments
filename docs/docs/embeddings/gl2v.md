@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Layout
-parent: Experiments
+title: GL2Vec
+parent: Embeddings
 ---
 
 # Layout Utilities

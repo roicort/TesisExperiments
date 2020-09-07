@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Typography
-parent: Experiments
+title: SF
+parent: Embeddings
 ---
 
 # Typography Utilities
