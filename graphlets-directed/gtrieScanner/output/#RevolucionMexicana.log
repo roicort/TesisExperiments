@@ -1,0 +1,17 @@
+------------------------------------------
+gtrieScanner (version 0.1)
+------------------------------------------
+Subgraph Size: 4
+Graph File: input/#RevolucionMexicana.edges
+Directed, 11688 Nodes, 20839 Edges
+Method:     GTRIE with file containing complete g-trie
+
+Counting subgraph frequency on 'ORIGINAL NETWORK'
+Reading G-Trie
+Creation time: 0.00
+Compression rate = 71.98%
+
+135 subgraphs, 701419533 occurrences
+Time elapsed: 9.748895s
+
+Results written to file "output/#RevolucionMexicana.txt"

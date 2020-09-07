@@ -1,0 +1,17 @@
+------------------------------------------
+gtrieScanner (version 0.1)
+------------------------------------------
+Subgraph Size: 4
+Graph File: input/#TimeForOBSESSION.edges
+Directed, 7012 Nodes, 22082 Edges
+Method:     GTRIE with file containing complete g-trie
+
+Counting subgraph frequency on 'ORIGINAL NETWORK'
+Reading G-Trie
+Creation time: 0.00
+Compression rate = 71.98%
+
+118 subgraphs, -1837739431 occurrences
+Time elapsed: 347.170534s
+
+Results written to file "output/#TimeForOBSESSION.txt"

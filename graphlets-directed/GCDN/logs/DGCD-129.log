@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "src/./Directed_Distances_v2.py", line 1174, in <module>
+    computeCorrelDist(corrMats, ndumpFolder + 'DGCD-129.txt')
+  File "src/./Directed_Distances_v2.py", line 231, in computeCorrelDist
+    corrMat1 = corrMats.values()[i]
+TypeError: 'dict_values' object is not subscriptable

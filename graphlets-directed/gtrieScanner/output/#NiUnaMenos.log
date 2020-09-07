@@ -1,0 +1,17 @@
+------------------------------------------
+gtrieScanner (version 0.1)
+------------------------------------------
+Subgraph Size: 4
+Graph File: input/#NiUnaMenos.edges
+Directed, 16162 Nodes, 21762 Edges
+Method:     GTRIE with file containing complete g-trie
+
+Counting subgraph frequency on 'ORIGINAL NETWORK'
+Reading G-Trie
+Creation time: 0.00
+Compression rate = 71.98%
+
+105 subgraphs, 118128145 occurrences
+Time elapsed: 1.691116s
+
+Results written to file "output/#NiUnaMenos.txt"

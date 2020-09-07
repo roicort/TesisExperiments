@@ -1,0 +1,68 @@
+[reading generic edge list: read_edge_list func]  filename: input/#DiaInternacionalDelHombre.edges
+|V|: 13617
+|E|: 17250
+p: 0.000186075
+d_max: 1897
+d_avg: 2
+r = -0.113423
+K = 11
+************************************************************
+total_2_1edge = 17250
+total_2_indep = 92687286
+----------------------------------------
+total_3_tris = 5691
+total_2_star = 2532206
+total_3_1edge = 229777265
+total_3_indep = 420491770718
+----------------------------------------
+total_4_clique = 3589
+total_4_chordcycle = 172228
+total_4_tailed_tris = 237114
+total_4_cycle = 21221
+total_3_star = 1220733667
+total_4_path = 1953480
+----------------------------------------
+total_4_1edge = 1532882737667
+total_4_2edge = 143635087
+total_4_2star = 30806440955
+total_4_tri = 76881348
+total_4_indep = 1430369293476224
+************************************************************
+graphlet decomposition time: 0.006953 sec
+--------------------------------------------------------------------------------
+Graphlet Frequency Distribution (GFD)
+--------------------------------------------------------------------------------
+4-clique     	2.5064e-12
+4-chordal-cycle	1.20276e-10
+4-tailed-tri	1.6559e-10
+4-cycle       	1.48198e-11
+3-star       	8.52507e-07
+4-path       	1.36422e-09
+4-node-1-tri   	5.36906e-08
+4-node-2-star  	2.15139e-05
+4-node-2-edge	1.00308e-07
+4-node-1-edge  	0.0010705
+4-node-indep  	0.998907
+
+
+--------------------------------------------------------------------------------
+Connected Motif Graphlet Frequency Distribution (GFD)
+--------------------------------------------------------------------------------
+4-clique     	2.9343e-06
+4-chordal-cycle	0.00014081
+4-tailed-tri	0.00019386
+4-cycle       	1.73499e-05
+3-star       	0.998048
+4-path       	0.00159713
+
+
+--------------------------------------------------------------------------------
+Disconnected Motif Graphlet Frequency Distribution (GFD)
+--------------------------------------------------------------------------------
+4-node-1-tri   	5.36906e-08
+4-node-2-star	2.15139e-05
+4-node-2-edge  	1.00309e-07
+4-node-1-edge  	0.0010705
+4-node-indep  	0.998908
+
+

@@ -1,0 +1,17 @@
+------------------------------------------
+gtrieScanner (version 0.1)
+------------------------------------------
+Subgraph Size: 4
+Graph File: input/K-pop.edges
+Directed, 15439 Nodes, 16087 Edges
+Method:     GTRIE with file containing complete g-trie
+
+Counting subgraph frequency on 'ORIGINAL NETWORK'
+Reading G-Trie
+Creation time: 0.00
+Compression rate = 71.98%
+
+34 subgraphs, 1074807345 occurrences
+Time elapsed: 15.042728s
+
+Results written to file "output/K-pop.txt"

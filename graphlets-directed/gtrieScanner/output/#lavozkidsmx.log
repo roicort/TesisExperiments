@@ -1,0 +1,17 @@
+------------------------------------------
+gtrieScanner (version 0.1)
+------------------------------------------
+Subgraph Size: 4
+Graph File: input/#lavozkidsmx.edges
+Directed, 1717 Nodes, 12309 Edges
+Method:     GTRIE with file containing complete g-trie
+
+Counting subgraph frequency on 'ORIGINAL NETWORK'
+Reading G-Trie
+Creation time: 0.00
+Compression rate = 71.98%
+
+199 subgraphs, 647400080 occurrences
+Time elapsed: 8.369465s
+
+Results written to file "output/#lavozkidsmx.txt"

@@ -1,0 +1,17 @@
+------------------------------------------
+gtrieScanner (version 0.1)
+------------------------------------------
+Subgraph Size: 4
+Graph File: input/#WonhoBelongsToMX.edges
+Directed, 3922 Nodes, 18736 Edges
+Method:     GTRIE with file containing complete g-trie
+
+Counting subgraph frequency on 'ORIGINAL NETWORK'
+Reading G-Trie
+Creation time: 0.00
+Compression rate = 71.98%
+
+178 subgraphs, 1470880586 occurrences
+Time elapsed: 77.322128s
+
+Results written to file "output/#WonhoBelongsToMX.txt"
