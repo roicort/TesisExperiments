@@ -15,5 +15,20 @@ parent: Embeddings
 
 ---
 
-
+### Clustering Jerárquico
 ![SF](../results/SF.png)
+### Matriz de Distancias
+![SF](../distances/SF.png)
+
+### TSNE
+
+<style>
+    iframe{
+    border: none;
+    }
+</style>
+<iframe
+    width="100%"
+    height="650px"
+    src="../results/TSNE-Graph2Vec.html">
+</iframe>
