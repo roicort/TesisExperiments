@@ -19,21 +19,21 @@ parent: Graphlets
 
 ### Usando la distancia DGCD-129
  Directed graphlet correlation distance using 2- to 4- node directed graphlet orbits 
-##### Dendograma
+##### Dendrograma
 ![DGCD](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/DGCD-129_dendogram.png)
 ##### Matriz de Distancia
 ![DGCD](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/DGCD-129.png)
 
 ### Usando la distancia RDGF
 Directed relative graphlet frequency distribution distance 
-##### Dendograma
+##### Dendrograma
 ![RDGF](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/RDGF_dendogram.png)
 ##### Matriz de Distancia
 ![RDGF](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/RDGF.png)
 
 ### Usando la distancia DGDDA
 Directed graphlet degree distribution agreement 
-##### Dendograma
+##### Dendrograma
 ![GDDA](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/GDDA_dendogram.png)
 ##### Matriz de Distancia
 ![GDDA](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/GDDA.png)
