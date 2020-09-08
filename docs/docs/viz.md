@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Visualisación
+title: Visualización
 nav_order: 5
 has_children: false
 permalink: /viz
