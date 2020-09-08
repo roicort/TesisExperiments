@@ -19,8 +19,8 @@ IODD: In and Out degree distribution distances #
 #log = graph2edges('../../datasets/twitter','input/')
 #log = runnerGC('input/','logs/')
 
-log = runnerdistances('input/','logs/',method = "DGCD-129",threads = 32)
+#log = runnerdistances('input/','logs/',method = "DGCD-129",threads = 32)
 #log = runnerdistances('input/','logs/',method = "RDGF",threads = 32)
 #log = runnerdistances('input/','logs/',method = "DGDDA",threads = 32)
 
-#log = clustering("output/","output/")
+log = clustering("output/","results/")

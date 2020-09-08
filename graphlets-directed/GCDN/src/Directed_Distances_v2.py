@@ -228,10 +228,10 @@ def computeCorrelDist(corrMats, outputName):
 	totalJobCount = len(corrMats) * (len(corrMats) - 1) / 2
 	pairCount = 0
 	for i in range(len(corrMats) - 1):
-		corrMat1 = corrMats.values()[i]
+		corrMat1 = list(corrMats.values())[i]
 		
 		for j in range(i+1, len(corrMats)):
-			corrMat2 = corrMats.values()[j]
+			corrMat2 = list(corrMats.values())[j]
 			
 			pair_queue.put((i, j, corrMat1, corrMat2))
 			pairCount += 1
