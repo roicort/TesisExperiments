@@ -17,11 +17,26 @@ parent: Graphlets
 
 # GCDN
 
-### Usando la distancia RDGF
+### Usando la distancia DGCD-129
+ Directed graphlet correlation distance using 2- to 4- node directed graphlet orbits 
 ##### Dendograma
-![G2V](../directedresults/RDGF_dendogram.png)
+![DGCD](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/DGCD-129_dendogram.png)
 ##### Matriz de Distancia
-![G2V](../directedresults/RDGF.png)
+![DGCD](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/DGCD-129.png)
+
+### Usando la distancia RDGF
+Directed relative graphlet frequency distribution distance 
+##### Dendograma
+![RDGF](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/RDGF_dendogram.png)
+##### Matriz de Distancia
+![RDGF](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/RDGF.png)
+
+### Usando la distancia DGDDA
+Directed graphlet degree distribution agreement 
+##### Dendograma
+![GDDA](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/GDDA_dendogram.png)
+##### Matriz de Distancia
+![GDDA](https://raw.githubusercontent.com/roicort/tesis/master/graphlets-directed/GCDN/results/GDDA.png)
 
 # gTrieScanner
 En desarrollo
