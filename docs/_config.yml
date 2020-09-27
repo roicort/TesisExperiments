@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: Rodrigo Cortez
 description: ENES Morelia 2020
-baseurl: "/tesis" # the subpath of your site, e.g. /blog
+baseurl: "/tesisgraphlets" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 permalink: pretty
@@ -57,7 +57,7 @@ heading_anchors: true
 # Aux links for the upper right navigation
 aux_links:
   "Go to Github":
-    - "//github.com/roicort/tesis"
+    - "//github.com/roicort/tesisgraphlets"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
