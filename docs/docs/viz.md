@@ -15,12 +15,12 @@ permalink: /viz
 # TwitterLens
 {: .no_toc }
 
-Es posible explorar los gráfos con esta herramienta de visulización. [Fullscreen](/tesis/graphviz/)
+Es posible explorar los gráfos con esta herramienta de visulización. [Fullscreen](/TesisGraphlets/graphviz/)
 {: .fs-6 .fw-300 }
 
 
 <iframe
     width="100%"
     height="400px"
-    src="/tesis/graphviz/index.html">
+    src="/TesisGraphlets/graphviz/index.html">
 </iframe>
