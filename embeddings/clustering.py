@@ -12,7 +12,10 @@ from bokeh.palettes import viridis
 from bokeh.plotting import figure
 from bokeh.transform import transform
 
-def clustering(read_path,save_path):
+def clustering(read_path,save_path,groupsfile='../datasets/Tweemes/groups.pickle'):
+
+    with open(groupsfile, 'rb') as handle:
+        groups = pickle.load(handle)
 
     files = []
 
@@ -32,10 +35,11 @@ def clustering(read_path,save_path):
             names, X = list(embeddings.keys()), list(embeddings.values())
 
         Z = hierarchy.linkage(X, 'ward')
+        labels = list([ str(name.replace("_"," "))+" - "+str(groups[name.replace("_"," ")]) for name in names])
         hierarchy.set_link_color_palette(['#03396C','#17BEBB','#C82B38','#FFC914','#562999','#76B041'])
-        hierarchy.dendrogram(Z,labels = names, orientation="left", color_threshold=0.5e15, above_threshold_color='grey', p=12,leaf_font_size=2)
+        hierarchy.dendrogram(Z,labels = labels, orientation="left", color_threshold=0.5e15, above_threshold_color='grey', p=12,leaf_font_size=1)
         plt.title('Model: '+name)
-        plt.savefig(save_path+name+".png",dpi=1000)
+        plt.savefig(save_path+name+"_dendrogram.svg")
         plt.clf()
 
         msg.good(name+ " Figure Saved")

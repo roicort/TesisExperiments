@@ -4,8 +4,12 @@ from tqdm import tqdm
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 
-def runPlot(read_path,save_path):
+def runPlot(read_path,save_path,groupsfile='../datasets/Tweemes/groups.pickle'):
+
+    with open(groupsfile, 'rb') as handle:
+        groups = pickle.load(handle)
 
     files = []
 
@@ -16,17 +20,20 @@ def runPlot(read_path,save_path):
     print("")
     files.sort()
     
-    msg.info("Reading...")
+    msg.info("Executing...")
     for file in tqdm(range(len(files))):
         path = files[file][0]
         name = files[file][1]
+        msg.info("Reading "+str(path))
+        msg.info("Plotting "+str(name))
         G = nx.read_gpickle(path)
         plt.figure(dpi=800)
         plt.axis('off')
         pos = nx.spring_layout(G)
-        nx.draw_networkx_nodes(G,pos, node_size=1,node_color='#939393',)
-        nx.draw_networkx_edges(G,pos,width=0.25, edge_color='#BDBDBD')
-        plt.savefig(save_path+name+".png")
+        nx.draw_networkx_nodes(G,pos,node_size=1,node_color='#939393',)
+        nx.draw_networkx_edges(G,pos,width=0.25,edge_color='#BDBDBD',alpha=0.8,arrows=False)
+        plt.savefig(save_path+name+" - "+groups[name]+".png")
         plt.clf()
+        os.system("clear")
 
-    return "Done"
+    return True
