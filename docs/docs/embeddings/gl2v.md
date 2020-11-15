@@ -30,5 +30,5 @@ parent: Embeddings
 <iframe
     width="100%"
     height="650px"
-    src="https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/results/TSNE-GL2Vec.html">
+    src="../TSNE/TSNE-GL2Vec.html">
 </iframe>
