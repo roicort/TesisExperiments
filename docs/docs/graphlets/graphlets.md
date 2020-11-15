@@ -6,8 +6,11 @@ has_children: true
 permalink: docs/graphlets
 ---
 
-# Embeddings
+# Graphlets
 {: .no_toc }
 
-CSS utility classes come in handy when you to want to override default styles to create additional whitespace (margins/padding), correct unexpected shifts in font size or weight, add color, or hide (or show) something at a specific screen size.
+Los graphlets son pequeños subgrafos inducidos no isomórficos conectados de una red.  Un subgrafo inducido debe contener todas las aristas entre sus nodos que están presentes en la  red.
+
+Los grafos fueron introducidos por primera vez por Nataša Pržulj, cuando se utilizaron como base para el diseño de dos nuevas medidas de alta sensibilidad de las similitudes estructurales locales de la red: la  relative graphlet frequency distance (RGFD) y la Graphlet degree distribution agreement (GDD-agreement).
+
 {: .fs-6 .fw-300 }
