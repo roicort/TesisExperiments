@@ -31,9 +31,11 @@ Relative Directed Graphlet Frequency Distribution Distance
 
 ### Usando la distancia DGDDA
 Directed Graphlet Degree Distribution Agreement 
-##### Dendrograma
+##### Dendrograma (GDDA)
 ![GDDA](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/graphlets-directed/GCDN/results/gdda_dendrogram.svg)
-[GDDG](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/graphlets-directed/GCDN/results/gddg_dendrogram.svg)
-##### Matriz de Distancia
+##### Dendrograma (GDDG)
+![GDDG](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/graphlets-directed/GCDN/results/gddg_dendrogram.svg)
+##### Matriz de Distancia (GDDA)
 ![GDDA](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/graphlets-directed/GCDN/results/GDDA.png)
-[GDDA](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/graphlets-directed/GCDN/results/GDDG.png)
+##### Matriz de Distancia (GDDG)
+![GDDA](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/graphlets-directed/GCDN/results/GDDG.png)
