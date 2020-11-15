@@ -1,6 +1,6 @@
 ---
 layout: default
-title: GCDN
+title: Directed
 parent: Graphlets
 ---
 
