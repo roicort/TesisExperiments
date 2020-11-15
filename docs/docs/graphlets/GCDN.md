@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Directed
+title: GCDN
 parent: Graphlets
 ---
 
@@ -14,8 +14,6 @@ parent: Graphlets
 {:toc}
 
 ---
-
-# GCDN
 
 ### Usando la distancia DGCD-129
  Directed graphlet correlation distance using 2- to 4- node directed graphlet orbits 
