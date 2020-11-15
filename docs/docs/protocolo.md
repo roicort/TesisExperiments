@@ -10,24 +10,25 @@ permalink: docs/protocolo
 {: .no_toc }
 
 Aprendizaje no supervisado para el estudio de redes temáticas de Twitter
-
 {: .fs-6 .fw-300 }
 
-Rodrigo Sebastián Cortez Madrigal
-Tesista Tecnologías para la Información en Ciencias
-Escuela Nacional de Estudios Superiores unidad Morelia Morelia, Michoacán rcortez@enesmorelia.unam.mx
+Rodrigo Sebastián Cortez Madrigal \
+Tesista \
+Tecnologías para la Información en Ciencias \
+Escuela Nacional de Estudios Superiores Unidad Morelia Morelia \
+rcortez@enesmorelia.unam.mx
 
-Dra. Marisol Flores Garrido 
-Asesora Tecnologías para la Información en Ciencias
-Escuela Nacional de Estudios Superiores unidad Morelia
+Dra. Marisol Flores Garrido \
+Asesora \
+Tecnologías para la Información en Ciencias \
+Escuela Nacional de Estudios Superiores Unidad Morelia \
 mflores@enesmorelia.unam.mx
 
-Dr. Luis Miguel García Velázquez
-Co-asesor Tecnologías para la Información en Ciencias
-Escuela Nacional de Estudios Superiores unidad Morelia
+Dr. Luis Miguel García Velázquez \
+Co-asesor \
+Tecnologías para la Información en Ciencias \
+Escuela Nacional de Estudios Superiores Unidad Morelia \
 luism_garcia@enesmorelia.unam.mx
-
-Octubre 2, 2020
   
 ## Antecedentes 
 
@@ -66,15 +67,15 @@ El tópico de una subred influye en la configuración de la misma a partir de la
     * Descargar la información y almacenarla en forma de redes dirigidas con un formato flexible que facilite su análisis posterior. Los nodos de las redes representarán usuarios que participaron en la discusión, y las aristas representarán interacciones entre usuarios. Es importante señalar que estas interacciones pueden ser unidireccionales. En cuanto al formato, se ha considerado una base de datos para grafos (Aura) o archivos como GraphML, GEFX, GML, Numpy Adjency, JSON, TXT Edge List, etc.
 * Cambiar el espacio de representación de los grafos para llevar a cabo tareas de agrupamiento. 
     * Puesto que las redes no son del mismo orden ni involucran a los mismos usuarios, agruparlas requiere que se tenga una representación de todas las redes en el mismo espacio. Se explorará la posibilidad de usar: 
-            * Descriptores generales de la red [3] 
-            * Subgrafos frecuentes: Network Motifs, Graphlets [5]
-            *Embeddings generados usando: Autoencoders, NetLSD [6], Graph2Vec [7], GeoScattering [8] ,SF [9]. Aunque una dificultad en este caso podría ser la interpretabilidad de los resultados.
-            Nota: Estas tareas serán realizadas en un servidor con las siguientes características para explotar el paralelismo de algunos algoritmos.
+        * Descriptores generales de la red [3] 
+        * Subgrafos frecuentes: Network Motifs, Graphlets [5]
+        *Embeddings generados usando: Autoencoders, NetLSD [6], Graph2Vec [7], GeoScattering [8] ,SF [9]. Aunque una dificultad en este caso podría ser la interpretabilidad de los resultados.
+        * Nota: Estas tareas serán realizadas en un servidor con las siguientes características para explotar el paralelismo de algunos algoritmos.
 
-                * Model name:                   Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz 
-                * Architecture:                    x86_64
-                * CPU(s):                            32
-                * Thread(s) per core:          2
+                Model name: Intel(R) Xeon(R) CPU E5-2620 v4 @ 2.10GHz 
+                Architecture: x86_64
+                CPU(s): 32
+                Thread(s) per core: 2
 
     * La representación seleccionada deberá: permitir una función de distancia para comparación de grafos, posibilitar una tarea de detección de grupos al interior de la colección, permitir una interpretación de los resultados y extraer información sobre los patrones de participación de los usuarios.
     * Llevar a cabo una tarea de agrupamiento en la colección de redes usando la representación seleccionada en el paso anterior. Esta tarea se llevará a cabo en Python quizá usando la biblioteca SKLearn o RAPIDS.
