@@ -16,7 +16,7 @@ parent: Embeddings
 ---
 
 ### Clustering Jerárquico
-![SF](https://github.com/roicort/TesisGraphlets/blob/master/embeddings/results/SF_dendrogram.svg)
+![SF](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/results/SF_dendrogram.svg)
 ### Matriz de Distancias
 ![SF](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/distance/SF.png)
 
