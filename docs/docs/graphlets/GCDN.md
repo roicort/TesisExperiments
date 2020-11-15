@@ -39,6 +39,3 @@ Directed Graphlet Degree Distribution Agreement
 ##### Matriz de Distancia
 ![GDDA](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/graphlets-directed/GCDN/results/GDDA.png)
 [GDDA](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/graphlets-directed/GCDN/results/GDDG.png)
-
-# gTrieScanner
-En desarrollo
