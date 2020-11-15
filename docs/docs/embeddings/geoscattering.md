@@ -16,9 +16,9 @@ parent: Embeddings
 ---
 
 ### Clustering Jerárquico
-![GEO](../results/GeoScattering.png)
+![GEO](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/results/GeoScattering_dendrogram.svg)
 ### Matriz de Distancias
-![GEO](../distances/GeoScattering.png)
+![GEO](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/distance/GeoScattering.png)
 
 ### TSNE
 
@@ -30,5 +30,5 @@ parent: Embeddings
 <iframe
     width="100%"
     height="650px"
-    src="../results/TSNE-Graph2Vec.html">
+    src="https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/results/TSNE-GeoScattering.html">
 </iframe>

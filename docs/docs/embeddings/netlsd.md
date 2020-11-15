@@ -16,9 +16,9 @@ parent: Embeddings
 ---
 
 ### Clustering Jerárquico
-![NetLSD](../results/NetLSD.png)
+![NetLSD](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/results/NetLSD_dendrogram.svg)
 ### Matriz de Distancias
-![NetLSD](../distances/NetLSD.png)
+![NetLSD](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/distance/NetLSD.png)
 
 ### TSNE
 
@@ -30,5 +30,5 @@ parent: Embeddings
 <iframe
     width="100%"
     height="650px"
-    src="../results/TSNE-Graph2Vec.html">
+    src="https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/results/TSNE-NetLSD.html">
 </iframe>

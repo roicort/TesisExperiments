@@ -16,9 +16,9 @@ parent: Embeddings
 ---
 
 ### Clustering Jerárquico
-![GL2V](../results/GL2Vec.png)
+![GL2V](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/results/GL2Vec_dendrogram.svg)
 ### Matriz de Distancias
-![GL2V](../distances/GL2Vec.png)
+![GL2V](https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/distance/GL2Vec.png)
 
 ### TSNE
 
@@ -30,5 +30,5 @@ parent: Embeddings
 <iframe
     width="100%"
     height="650px"
-    src="../results/TSNE-Graph2Vec.html">
+    src="https://raw.githubusercontent.com/roicort/TesisGraphlets/master/embeddings/results/TSNE-GL2Vec.html">
 </iframe>
