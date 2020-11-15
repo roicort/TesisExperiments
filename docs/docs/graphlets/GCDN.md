@@ -4,7 +4,7 @@ title: Directed
 parent: Graphlets
 ---
 
-# Directed
+# GCDN
 {: .no_toc }
 
 ## Table of contents
