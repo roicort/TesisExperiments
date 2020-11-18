@@ -16,19 +16,19 @@ Rodrigo Sebastián Cortez Madrigal \
 Tesista \
 Tecnologías para la Información en Ciencias \
 Escuela Nacional de Estudios Superiores UNAM Unidad Morelia \
-rcortez@enesmorelia.unam.mx
+rcortez+@enesmorelia+.unam.mx
 
 Dra. Marisol Flores Garrido \
 Asesora \
 Tecnologías para la Información en Ciencias \
 Escuela Nacional de Estudios Superiores UNAM Unidad Morelia \
-mflores@enesmorelia.unam.mx
+mflores+@enesmorelia+.unam.mx
 
 Dr. Luis Miguel García Velázquez \
 Co-asesor \
 Tecnologías para la Información en Ciencias \
 Escuela Nacional de Estudios Superiores UNAM Unidad Morelia \
-luism_garcia@enesmorelia.unam.mx
+luism_garcia+@enesmorelia+.unam.mx
   
 ## Antecedentes 
 
