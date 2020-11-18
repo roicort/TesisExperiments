@@ -15,19 +15,19 @@ Aprendizaje no supervisado para el estudio de redes temáticas de Twitter
 Rodrigo Sebastián Cortez Madrigal \
 Tesista \
 Tecnologías para la Información en Ciencias \
-Escuela Nacional de Estudios Superiores Unidad Morelia Morelia \
+Escuela Nacional de Estudios Superiores UNAM Unidad Morelia \
 rcortez@enesmorelia.unam.mx
 
 Dra. Marisol Flores Garrido \
 Asesora \
 Tecnologías para la Información en Ciencias \
-Escuela Nacional de Estudios Superiores Unidad Morelia \
+Escuela Nacional de Estudios Superiores UNAM Unidad Morelia \
 mflores@enesmorelia.unam.mx
 
 Dr. Luis Miguel García Velázquez \
 Co-asesor \
 Tecnologías para la Información en Ciencias \
-Escuela Nacional de Estudios Superiores Unidad Morelia \
+Escuela Nacional de Estudios Superiores UNAM Unidad Morelia \
 luism_garcia@enesmorelia.unam.mx
   
 ## Antecedentes 
