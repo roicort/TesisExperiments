@@ -33,6 +33,8 @@ def graph2edges(read_path,save_path):
         print("\n")
 
         G = nx.read_graphml(path)
+        G.remove_edges_from(list(nx.selfloop_edges(G)))
+        G.remove_nodes_from(list(nx.isolates(G)))
         G = nx.convert_node_labels_to_integers(G)
         Edges = nx.to_pandas_edgelist(G,source="Source", target="Target")
 

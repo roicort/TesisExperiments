@@ -1,14 +1,10 @@
 0 Plume for Android
-1 34
-2 712
+1 33
+2 672
 3 TweetDeck
-4 1495
-5 196
-6 3394
-7 525
-8 "Tweetbot
-9 for
-10 "Twitter
-11 Web
-12 "ZT
-13 Social
+4 189
+5 497
+6 "Tweetbot
+7 for
+8 "Twitter
+9 Web
