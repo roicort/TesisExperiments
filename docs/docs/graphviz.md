@@ -3,7 +3,7 @@ layout: default
 title: Visualización
 nav_order: 5
 has_children: false
-permalink: /viz
+permalink: /graphviz
 ---
 
 <style>
@@ -12,7 +12,7 @@ permalink: /viz
     }
 </style>
 
-# TwitterLens
+# GraphViz
 {: .no_toc }
 
 Es posible explorar los gráfos con esta herramienta de visulización. [Fullscreen](https://tesisgraphlets-viz.vercel.app)
