@@ -1,0 +1,4 @@
+---
+title: MatriomonioIgualitarioPuebla
+caption: Politica
+---
