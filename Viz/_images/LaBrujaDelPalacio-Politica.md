@@ -1,4 +1,0 @@
----
-title: LaBrujaDelPalacio
-caption: Politica
----

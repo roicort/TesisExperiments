@@ -1,4 +1,0 @@
----
-title: MasterChefMx
-caption: Entretenimiento
----

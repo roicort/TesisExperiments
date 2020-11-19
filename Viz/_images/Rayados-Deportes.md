@@ -1,4 +1,0 @@
----
-title: Rayados
-caption: Deportes
----

@@ -1,4 +1,0 @@
----
-title: KAROL
-caption: Entretenimiento
----

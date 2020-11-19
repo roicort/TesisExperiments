@@ -1,4 +1,0 @@
----
-title: XSXFridgeSweeps
-caption: Entretenimiento
----

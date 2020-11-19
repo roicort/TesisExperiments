@@ -1,4 +1,0 @@
----
-title: Maluma
-caption: Entretenimiento
----

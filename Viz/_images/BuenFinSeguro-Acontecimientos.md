@@ -1,4 +1,0 @@
----
-title: BuenFinSeguro
-caption: Acontecimientos
----

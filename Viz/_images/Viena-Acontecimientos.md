@@ -1,4 +1,0 @@
----
-title: Viena
-caption: Acontecimientos
----

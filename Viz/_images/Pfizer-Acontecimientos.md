@@ -1,4 +1,0 @@
----
-title: Pfizer
-caption: Acontecimientos
----

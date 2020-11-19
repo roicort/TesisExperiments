@@ -1,4 +1,0 @@
----
-title: Chile
-caption: MovimientosCiudadanos
----

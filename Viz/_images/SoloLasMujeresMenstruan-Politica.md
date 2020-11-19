@@ -1,4 +1,0 @@
----
-title: SoloLasMujeresMenstruan
-caption: Politica
----

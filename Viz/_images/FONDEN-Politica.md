@@ -1,4 +1,0 @@
----
-title: FONDEN
-caption: Politica
----

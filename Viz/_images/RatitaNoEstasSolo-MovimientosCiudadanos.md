@@ -1,4 +1,0 @@
----
-title: RatitaNoEstasSolo
-caption: MovimientosCiudadanos
----

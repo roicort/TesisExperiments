@@ -1,4 +1,0 @@
----
-title: Fakeministas
-caption: MovimientosCiudadanos
----

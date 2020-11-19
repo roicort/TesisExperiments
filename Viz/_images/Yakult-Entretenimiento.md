@@ -1,4 +1,0 @@
----
-title: Yakult
-caption: Entretenimiento
----

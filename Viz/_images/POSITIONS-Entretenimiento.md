@@ -1,4 +1,0 @@
----
-title: POSITIONS
-caption: Entretenimiento
----
