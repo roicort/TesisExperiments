@@ -54,7 +54,7 @@ def clustering(read_path,save_path,groupsfile='../../datasets/Tweemes/groups.pic
                 rotation_mode="anchor")
 
         fig.colorbar(im)
-        fig.savefig(save_path+name+"-D"+".png",dpi=1500)
+        fig.savefig(save_path+name.upper()+"-D"+".png",dpi=1500)
         fig.clf()
 
         # convert the redundant n*n square matrix form into a condensed nC2 array
@@ -65,7 +65,7 @@ def clustering(read_path,save_path,groupsfile='../../datasets/Tweemes/groups.pic
             hierarchy.set_link_color_palette(['#03396C','#17BEBB','#C82B38','#FFC914','#562999','#76B041'])
             hierarchy.dendrogram(Z,labels = labels, orientation="left", color_threshold=9, above_threshold_color='grey', p=12,leaf_font_size=1)
             plt.title('Model: '+name.upper()+' - Method: '+method.upper())
-            plt.savefig(save_path+name+"-"+method.upper()+".dendrogram.svg")
+            plt.savefig(save_path+name.upper()+"-"+method.upper()+".dendrogram.svg")
             plt.clf()
             msg.good(name.upper()+"-"+method+".dendrogram.svg"+ " Saved")
             os.system('clear')
