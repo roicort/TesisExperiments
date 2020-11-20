@@ -15,18 +15,20 @@ DSD: Directed spectral distance #
 IODD: In and Out degree distribution distances #
 """
 
-log = graph2edges('../../datasets/Tweemes','input/')
-log = runnerGC('input/','logs/')
-log = runnerdistances('input/','logs/',method = "DGCD-129",threads = 32)
-shutil.move('input/DGCD-129.txt', 'output/DGCD-129.txt')
-log = runnerdistances('input/','logs/',method = "RDGF",threads = 32)
-shutil.move('input/RDGF.txt', 'output/RDGF.txt')
-log = runnerdistances('input/','logs/',method = "DGDDA",threads = 32)
-shutil.move('input/gdda.txt', 'output/gdda.txt')
-shutil.move('input/gddg.txt', 'output/gddg.txt')
-if clustering("output/","results/"):
+if graph2edges('../../datasets/Tweemes','input/'):
+    msg.good("Preprocessing Done")
+if runnerGC('input/','logs/'):
+    msg.good("Precompute Done")
+if runnerdistances('input/','logs/',method = "DGCD-129",threads = 32):
+    shutil.move('input/DGCD-129.txt', 'output/DGCD-129.txt')
     msg.good("DGCD-129 Done!")
+if runnerdistances('input/','logs/',method = "RDGF",threads = 32):
+    shutil.move('input/RDGF.txt', 'output/RDGF.txt')
     msg.good("RDGF Done!")
+if runnerdistances('input/','logs/',method = "DGDDA",threads = 32):
+    shutil.move('input/gdda.txt', 'output/gdda.txt')
+    shutil.move('input/gddg.txt', 'output/gddg.txt')
     msg.good("DGDDA Done!")
+if clustering("output/","results/"):
     msg.good("Clustering Done!")
 

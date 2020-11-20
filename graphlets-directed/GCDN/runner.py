@@ -25,7 +25,7 @@ def runnerGC(read_path,save_path):
         os.system(rungdgv)
         os.system("clear")
         msg.info(rungdgv)
-    return "Done"
+    return True
 
 def runnerdistances(read_path,save_path,method,threads):
     distances = { "DGCD-13": 1, "DGCD-129": 2, "RDGF": 3, "DGDDA": 4, "DSD": 5, "IODD": 6}
@@ -33,4 +33,4 @@ def runnerdistances(read_path,save_path,method,threads):
     os.system(rungdgv)
     os.system("clear")
     msg.info(rungdgv)
-    return "Done"
+    return True

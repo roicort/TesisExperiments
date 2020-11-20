@@ -47,4 +47,4 @@ def graph2edges(read_path,save_path):
         os.system('clear')
         print('\n\n')
         
-    return "Done"
+    return True
