@@ -8,6 +8,7 @@ from scipy.cluster import hierarchy
 import matplotlib.pyplot as plt
 import pickle
 from wasabi import msg
+import plotly.figure_factory as ff
 
 def clustering(read_path,save_path,groupsfile='../../datasets/Tweemes/groups.pickle'):
 
@@ -61,13 +62,25 @@ def clustering(read_path,save_path,groupsfile='../../datasets/Tweemes/groups.pic
         X = ssd.squareform(mdf)
         labels = list([ str(name.replace("_"," "))+" - "+str(groups[name.replace("_"," ")]) for name in names.to_numpy()])
         for method in ['single','complete','average','weighted','centroid','median','ward']:
-            Z = hierarchy.linkage(X, method=method,optimal_ordering=True)
-            hierarchy.set_link_color_palette(['#03396C','#17BEBB','#C82B38','#FFC914','#562999','#76B041'])
+            #Matplotlib
+            """Z = hierarchy.linkage(X, method=method,optimal_ordering=True)
+            #hierarchy.set_link_color_palette(['#03396C','#17BEBB','#C82B38','#FFC914','#562999','#76B041'])
             hierarchy.dendrogram(Z,labels = labels, orientation="left", color_threshold=9, above_threshold_color='grey', p=12,leaf_font_size=1)
             plt.title('Model: '+name.upper()+' - Method: '+method.upper())
             plt.savefig(save_path+name.upper()+"-"+method.upper()+".dendrogram.svg")
-            plt.clf()
-            msg.good(name.upper()+"-"+method+".dendrogram.svg"+ " Saved")
+            plt.clf()"""
+            #Plotly
+            X = mdf
+            fig = ff.create_dendrogram(X, orientation='left', labels=labels, linkagefun=lambda alpha: hierarchy.linkage(alpha,method=method,optimal_ordering=True))
+            fig.update_layout(
+            width=1024,
+            height=1024,
+            title_text='Model: '+name.upper()+' - Method: '+method.upper(),
+            )
+            #fig.layout.font.size = 2
+            fig.write_html(save_path+name.upper()+"-"+method.upper()+".dendrogram.html")
+            
+            msg.good(name.upper()+"-"+method+".dendrogram"+ " Saved")
             os.system('clear')
         print('\n\n')
      
