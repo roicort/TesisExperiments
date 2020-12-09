@@ -19,9 +19,9 @@ if input("Run Embedding Experiment? (Y/N) ")=="Y":
 
 if input("Run GCDN Experiment? (Y/N) ")=="Y":
     msg.info("Running GCDN Experiment")
-    os.chdir("graphlets-directed/GCDN")
+    os.chdir("GCDN/")
     os.system("python main.py")
-    os.chdir("../..")
+    os.chdir("..")
     msg.good("Finished GCDN Experiment")
     
 if input("Run Plots? (Y/N) ")=="Y":
