@@ -1,4 +1,0 @@
----
-title: Pumas
-caption: Deportes
----

@@ -1,4 +1,0 @@
----
-title: ByeByeTrump
-caption: Politica
----

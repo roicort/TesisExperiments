@@ -1,4 +1,0 @@
----
-title: DiaDeMuertos
-caption: Acontecimientos
----

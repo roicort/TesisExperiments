@@ -1,4 +1,0 @@
----
-title: BobEsponja
-caption: Entretenimiento
----

@@ -1,4 +1,0 @@
----
-title: Temblor
-caption: Acontecimientos
----

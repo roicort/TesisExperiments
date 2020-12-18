@@ -1,4 +1,0 @@
----
-title: LordMontajes
-caption: Diversos
----

@@ -1,4 +1,0 @@
----
-title: Trump
-caption: Politica
----

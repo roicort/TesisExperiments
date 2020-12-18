@@ -1,4 +1,0 @@
----
-title: SiguesTuLopez
-caption: Politica
----

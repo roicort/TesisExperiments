@@ -1,4 +1,0 @@
----
-title: TarjetaRosa
-caption: Politica
----

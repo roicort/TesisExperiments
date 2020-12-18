@@ -16,15 +16,15 @@ IODD: In and Out degree distribution distances #
 """
 
 
-#if graph2edges('../datasets/Tweemes','input/'):
-#    msg.good("Preprocessing Done")
+if graph2edges('../datasets/Tweemes','input/'):
+    msg.good("Preprocessing Done")
 
 #if runnerGC('input/','logs/'):
 #    msg.good("Precompute done")
 
-#if parallelrunnerGC('input/','logs/',threads=32):
-#    msg.good("Parallel precompute done")
-"""
+if parallelrunnerGC('input/','logs/',threads=32):
+    msg.good("Parallel precompute done")
+
 if runnerdistances('input/','logs/',method = "DGCD-129",threads = 32):
     shutil.move('input/DGCD-129.txt', 'output/DGCD-129.txt')
     msg.good("DGCD-129 Done!")
@@ -40,7 +40,7 @@ if runnerdistances('input/','logs/',method = "DGDDA",threads = 32):
 
 if hierarchyclustering("output/","results/"):
     msg.good("Hierarchycal clustering Done!")
-"""
+
 if kmedoidsclustering("output/","results/"):
     msg.good("K-medoids clustering Done!")
 

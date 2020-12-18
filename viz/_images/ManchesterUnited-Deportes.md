@@ -1,4 +1,0 @@
----
-title: ManchesterUnited
-caption: Deportes
----
