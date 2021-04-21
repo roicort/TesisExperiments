@@ -5,7 +5,7 @@ import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
-from fa2 import ForceAtlas2
+#from fa2 import ForceAtlas2
 
 def runPlot(read_path,save_path,groupsfile='../datasets/Tweemes/groups.pickle'):
 
@@ -22,6 +22,7 @@ def runPlot(read_path,save_path,groupsfile='../datasets/Tweemes/groups.pickle'):
     files.sort()
     
     msg.info("Executing...")
+    """
     forceatlas2 = ForceAtlas2(
                         # Behavior alternatives
                         outboundAttractionDistribution=False,  # Dissuade hubs
@@ -39,6 +40,7 @@ def runPlot(read_path,save_path,groupsfile='../datasets/Tweemes/groups.pickle'):
 
                         # Log
                         verbose=True)
+    """
     for file in tqdm(range(len(files))):
         path = files[file][0]
         name = files[file][1]
@@ -47,8 +49,8 @@ def runPlot(read_path,save_path,groupsfile='../datasets/Tweemes/groups.pickle'):
         G = nx.read_gpickle(path)
         G.remove_edges_from(list(nx.selfloop_edges(G)))
         G.remove_nodes_from(list(nx.isolates(G)))
-        pos = forceatlas2.forceatlas2_networkx_layout(G, pos=None, iterations=200)
-        #pos = nx.spring_layout(G)
+        #pos = forceatlas2.forceatlas2_networkx_layout(G, pos=None, iterations=200)
+        pos = nx.spring_layout(G)
         plt.figure(dpi=800)
         plt.axis('off')
         nx.draw_networkx_nodes(G,pos,node_size=0.5,node_color='#939393',)

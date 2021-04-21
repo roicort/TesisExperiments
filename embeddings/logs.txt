@@ -1,0 +1,4 @@
+G2V running time: 9.465217590332031e-05
+SF running time: 0.00023818016052246094
+NetLSD running time: 0.0004673004150390625
+GeoScattering running time: 0.00014328956604003906
