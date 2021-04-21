@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Orbits
-nav_order: 4
+title: GCDN
+nav_order: 6
 has_children: false
-permalink: docs/orbits
+permalink: docs/GCDN
 ---
 
 # Graphlets
