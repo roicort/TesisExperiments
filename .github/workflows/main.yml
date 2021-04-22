@@ -28,8 +28,9 @@ jobs:
       - name: copy file
         uses: canastro/copy-file-action@master
         with:
-          source: "baseline/results/*"
-          target: "../../docs/docs/baseline/"
+          source: baseline/results/.
+          target: docs/docs/baseline/
+          flags: '-r'
           
       # Runs a single command using the runners shell
       - name: Run a one-line script
