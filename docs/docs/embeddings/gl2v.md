@@ -1,7 +1,7 @@
 ---
 layout: default
 title: GL2Vec
-parent: Embeddings
+parent: Embeddingskdjgsbfj
 ---
 
 # Color Utilities
