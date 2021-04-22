@@ -30,5 +30,5 @@ parent: Embeddings
 <iframe
     width="100%"
     height="650px"
-    src="../TSNE/TSNE-NetLSD.html">
+    src="../iframes/TSNE-NetLSD.html">
 </iframe>

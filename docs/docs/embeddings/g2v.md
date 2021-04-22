@@ -33,5 +33,5 @@ parent: Embeddings
 <iframe
     width="100%"
     height="650px"
-    src="../TSNE/TSNE-Graph2Vec.html">
+    src="../iframes/TSNE-Graph2Vec.html">
 </iframe>
