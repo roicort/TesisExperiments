@@ -4,7 +4,7 @@ title: Users
 parent: GCDN
 ---
 
-# Color Utilities
+# {{ page.title }}
 {: .no_toc }
 
 ## Table of contents

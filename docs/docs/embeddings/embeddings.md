@@ -6,7 +6,9 @@ has_children: true
 permalink: /embeddings
 ---
 
-# Embeddings
+
+# {{ page.title }}
+
 {: .no_toc }
 
 En Aprendizaje de Máquina (ML), *Representation Learning* es un conjunto de técnicas que permite a un sistema descubrir automáticamente las representaciones necesarias para la detección o clasificación de características a partir de datos brutos. Esto reemplaza la ingeniería de atributos manual y permite que una máquina aprenda las características y las utilice para realizar una tarea específica.

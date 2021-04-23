@@ -4,7 +4,7 @@ title: Dendrogram
 parent: Baseline
 ---
 
-# Color Utilities
+# {{ page.title }}
 {: .no_toc }
 
 ## Table of contents

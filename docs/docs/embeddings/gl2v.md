@@ -4,7 +4,7 @@ title: GL2Vec
 parent: Embeddingskdjgsbfj
 ---
 
-# Color Utilities
+# {{ page.title }}
 {: .no_toc }
 
 ## Table of contents

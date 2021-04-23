@@ -4,7 +4,7 @@ title: Graph2Vec
 parent: Embeddings
 ---
 
-# Color Utilities
+# {{ page.title }}
 {: .no_toc }
 
 ## Table of contents

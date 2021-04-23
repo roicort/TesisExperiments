@@ -4,7 +4,7 @@ title: Himelboim et al.
 parent: Baseline
 ---
 
-# Color Utilities
+# {{ page.title }}
 {: .no_toc }
 
 ## Table of contents
