@@ -1,33 +1,33 @@
 from wasabi import msg
 from preprocessing import graph2edges
-from runner import runnerGC, runnerdistances, parallelrunnerGC
+from runner import parallelrunnerGC, runnerdistances
 from clustering_distances import DistanceHierarchy, DistanceKMedoids
 from clustering_graphlets import GraphletKMeans, GraphletHierarchy
-from clustering_users import UsersKMeans, UsersHierarchy
+from clustering_users import UsersMiniBatchKMeansEmbedding, GetStabilityEmbedding, OptKEmbedding, OptKClustering, AuditCentroids
+from clustering_users import GetStabilityClustering, UsersMiniBatchKMeansClustering, UsersDendrogramClustering, ViewNetworks
 import shutil
 
 from correlations import GraphletCorrelations
-
-"""
 
 ########################################################################
 
 #Preprocessing
 
-if graph2edges('../datasets/Tweemes','input/'):
-    msg.good("Preprocessing Done")
+#if graph2edges('../datasets/Tweemes','input/'):
+#    msg.good("Preprocessing Done")
 
 ########################################################################
 
 #PreCompute
 
-if parallelrunnerGC('input/','logs/',threads=32):
-    msg.good("Parallel precompute done")
+#if parallelrunnerGC('input/','logs/',threads=24):
+#    msg.good("Parallel precompute done")
 
 ########################################################################
 
 #Compute Distances
 
+"""
 #Methods
 
 # DGCD-13: Directed graphlet correlation distance using 2- to 3- node directed graphlet orbits #
@@ -75,11 +75,32 @@ if runnerdistances('input/','logs/',method = "DGDDA",threads = 32):
 
 #ByUsers
 
-#if UsersKMeans("input/","users/"):
-#    msg.good("UsersKMeans Done!")
-#if UsersHierarchy("input/","users/"):
-#    msg.good("UsersHierarchy Done!")
+#if OptKEmbedding("input/","stability/"):
+#    msg.good("GAP Done")
+
+if GetStabilityEmbedding("input/","stability/",runs=50,K=5):
+    msg.good("Embedding Stability Done")
+
+#if UsersMiniBatchKMeansEmbedding("input/","users/",K=5):
+#    msg.good("KMeans Embedding Done!")
+
+#OptKClustering("users/5-MiniBatchUsersEmbedding.csv","stability/")
+
+#if GetStabilityClustering("users/4-MiniBatchUsersEmbedding.csv","stability/",runs=50,K=3):
+#    msg.good("NetworkClustering Stability Done")
+
+#UsersDendrogramClustering("users/5-MiniBatchUsersEmbedding.csv","users/")
+
+#UsersDendrogramClustering("users/5-NormMiniBatchUsersEmbedding.csv","users/", name = "Norm")
+
+#UsersMiniBatchKMeansClustering("users/5-MiniBatchUsersEmbedding.csv","users/", K=5)
 
 ########################################################################
 
-GraphletCorrelations("input/","correlations/")
+#Others
+
+#GraphletCorrelations("input/","correlations/")
+
+#ViewNetworks("users/4-MiniBatchUsersClustering.csv","users/")
+
+#AuditCentroids("users/3-CentroidsMiniBatchEmbedding.out")

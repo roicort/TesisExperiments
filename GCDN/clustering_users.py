@@ -1,3 +1,4 @@
+from scipy import cluster
 from wasabi import msg
 from tqdm import tqdm
 import os
@@ -6,23 +7,28 @@ import numpy as np
 
 from sklearn.cluster import KMeans, MiniBatchKMeans
 from sklearn.manifold import TSNE
-from sklearn.preprocessing import MinMaxScaler 
+from sklearn import preprocessing as skp
 
 from yellowbrick.cluster import KElbowVisualizer
-from yellowbrick.cluster import SilhouetteVisualizer
 
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 import plotly as py
 import plotly.graph_objs as go
-from plotly.offline import plot, iplot
 import plotly.figure_factory as ff
+import plotly.express as px
 
+import scipy.spatial.distance as ssd
 import scipy.stats as stats
-from scipy.cluster import hierarchy
+from scipy.cluster import hierarchy as h
+
+from sklearn.metrics.cluster import normalized_mutual_info_score
+
+from gap_statistic import OptimalK
 
 
-def UsersKMeans(read_path,save_path):
+def OptKEmbedding(read_path, save_path, nrefs=5, maxClusters=15):
 
     files = []
 
@@ -41,190 +47,173 @@ def UsersKMeans(read_path,save_path):
         df["Network"] = name
         aux = pd.concat([aux, df])
     
-    print(aux)
     X = aux.drop(columns=["Network"])
     aux = aux["Network"]
 
-    for column in X:
-        X[column] = MinMaxScaler().fit_transform(X[column].values.reshape(-1, 1))
+    X = X.div(X.sum(axis=1), axis=0) #Normalize
+
+    #for index, row in X.iterrows():
+    #    print(sum(row.to_numpy()))
 
     msg.good("Preprocessing Done")
-
-    z = np.abs(stats.zscore(X))
-
-    XClean = X[(z<4).all(axis=1)]
-
-    print("LenX "+str(len(X)))
-    print("LenXClean ="+str(len(XClean)))
-    print("Outliers = "+str(len(X)-len(XClean)))
 
     #Finding-K---------------------------------------------------------
 
-    msg.info("Computing Elbow")
+
+    msg.info("Computing Distortion")
     model = KMeans()
-    visualizer = KElbowVisualizer(model, k=(2,12))
-    visualizer.fit(X)        # Fit the data to the visualizer
-    visualizer.show()        # Finalize and render the figure
-    plt.savefig(save_path+"ElbowPlotKUsersWON"+".png",dpi=1500)
+    visualizer = KElbowVisualizer(model, k=(2,12),metric='distortion',timings = True)
+    visualizer.fit(X)        
+    visualizer.show()        
+    plt.savefig(save_path+"Embedding-Distortion-Kusers"+".svg")
     msg.good("Elbow Done")
     plt.clf()
 
-    #KMEANS---------------------------------------------------------
-    """
-    msg.info("Computing KMeans")
-    for k in tqdm(range(2,9)):
-        kmeans = KMeans(n_clusters=k, n_init=100, init='k-means++',random_state=10,verbose=0,n_jobs=-1)
-        kmeans.fit(X)
-        centroids = kmeans.cluster_centers_
-        inertia = np.array([kmeans.inertia_])
-        np.savetxt(save_path+'K'+str(k)+'inertia.out', inertia, delimiter=',') 
-        np.savetxt(save_path+'K'+str(k)+'centroids.out', centroids, delimiter=',') 
-    msg.good("KMeans Done")
-    """
-    #TSNE---------------------------------------------------------
+    #msg.info("Computing Silhouette")
+    #model = KMeans()
+    #visualizer = KElbowVisualizer(model, k=(2,12),metric='silhouette', timings = True)
+    #visualizer.fit(X)
+    #visualizer.show()  
+    #plt.savefig(save_path+"Silhouette-Kusers"+".svg")
+    #msg.good("Silhouette Done")
+    #plt.clf()
 
-    kmeans = KMeans(n_clusters=4, n_init=100, init='k-means++',random_state=10,verbose=0,n_jobs=-1)
+    msg.info("Computing CalinskiHarabasz")
+    model = KMeans()
+    visualizer = KElbowVisualizer(model, k=(2,12),metric='calinski_harabasz', timings = True)
+    visualizer.fit(X)
+    visualizer.show()  
+    plt.savefig(save_path+"Embedding-CalinskiHarabasz-Kusers"+".svg")
+    msg.good("CalinskiHarabasz Done")
+    plt.clf()
+
+    #X = X.to_numpy()
+
+    """
+    
+    gaps = np.zeros((len(range(1, maxClusters)),))
+    resultsdf = pd.DataFrame({'clusterCount':[], 'gap':[]})
+    msg.info("Computing GAP Stats")
+    for gap_index, k in enumerate(tqdm(range(1, maxClusters))):
+
+        # Holder for reference dispersion results
+        refDisps = np.zeros(nrefs)
+
+        # For n references, generate random sample and perform kmeans getting resulting dispersion of each loop
+        for i in range(nrefs):
+            
+            # Create new random reference set
+            randomReference = np.random.random_sample(size=X.shape)
+            
+            # Fit to it
+            km = MiniBatchKMeans(k)
+            km.fit(randomReference)
+            
+            refDisp = km.inertia_
+            refDisps[i] = refDisp
+
+        # Fit cluster to original data and create dispersion
+        km = MiniBatchKMeans(k)
+        km.fit(X)
+
+        origDisp = km.inertia_
+
+        # Calculate gap statistic
+        gap = np.log(np.mean(refDisps)) - np.log(origDisp)
+
+        # Assign this loop's gap statistic to gaps
+        gaps[gap_index] = gap
+
+        resultsdf = resultsdf.append({'clusterCount':k, 'gap':gap}, ignore_index=True)
+
+    KO = gaps.argmax() + 1 
+
+    plt.grid(True)
+    plt.plot(resultsdf['clusterCount'], resultsdf['gap'], linestyle='--', marker='o', color='b');
+    plt.xlabel('K');
+    plt.ylabel('GAP Statistic');
+    plt.title('Optimal K Found in K = ' + str(KO));
+    plt.savefig(save_path+"GAP-Kusers.svg")
+    plt.clf()
+    """
+
+    optimalK = OptimalK(parallel_backend='multiprocessing',n_jobs=16)
+
+    optimalK(X, cluster_array=np.arange(1, maxClusters))
+
+    plt.plot(optimalK.gap_df.n_clusters, optimalK.gap_df.gap_value, linewidth=3)
+    plt.scatter(
+        optimalK.gap_df[optimalK.gap_df.n_clusters == optimalK.n_clusters].n_clusters,
+        optimalK.gap_df[optimalK.gap_df.n_clusters == optimalK.n_clusters].gap_value,
+        s=250,
+        c="r",
+    )
+    plt.grid(True)
+    plt.xlabel("Cluster Count")
+    plt.ylabel("Gap Stats")
+    plt.title("Gap Stats by Cluster Count")
+    plt.savefig(save_path+"Embedding-GAPStats-Kusers.svg")
+    plt.clf()
+
+    # diff plot
+    plt.plot(optimalK.gap_df.n_clusters, optimalK.gap_df["diff"], linewidth=3)
+    plt.grid(True)
+    plt.xlabel("Cluster Count")
+    plt.ylabel("Diff Value")
+    plt.title("Diff Values by Cluster Count")
+    plt.savefig(save_path+"Embedding-GAPDiff-Kusers.svg")
+    plt.clf()
+
+
+    # Gap* plot
+    #max_ix = optimalK.gap_df[optimalK.gap_df["gap*"] == optimalK.gap_df["gap*"].max()].index[0]
+    #plt.plot(optimalK.gap_df.n_clusters, optimalK.gap_df["gap*"], linewidth=3)
+    #plt.scatter(
+    #    optimalK.gap_df.loc[max_ix]["n_clusters"],
+    #    optimalK.gap_df.loc[max_ix]["gap*"],
+    #    s=250,
+    #    c="r",
+    #)
+    
+    #plt.grid(True)
+    #plt.xlabel("Cluster Count")
+    #plt.ylabel("Gap* Stats")
+    #plt.title("Gap* Stats by Cluster Count")
+    #plt.savefig(save_path+"GAP*Stats-Kusers.svg")
+    #plt.clf()
+
+
+    # diff* plot
+    #plt.plot(optimalK.gap_df.n_clusters, optimalK.gap_df["diff*"], linewidth=3)
+    #plt.grid(True)
+    #plt.xlabel("Cluster Count")
+    #plt.ylabel("Diff* Value")
+    #plt.title("Diff* Values by Cluster Count")
+    #plt.savefig(save_path+"GAP*Diff-Kusers.svg")
+    #plt.clf()
+
+    return True # Plus 1 because index of 0 means 1 cluster is optimal, index 2 = 3 clusters are optimal
+
+
+def GetMiniBatchKMeans(X,K):
+
+    kmeans = MiniBatchKMeans(n_clusters=K, n_init=1, init='k-means++',random_state=None,verbose=0)
     kmeans.fit(X)
+
     clusters = kmeans.predict(X)
-    X["Cluster"] = clusters
-    X["Network"] = aux
+    #X["Cluster"] = clusters
 
-    msg.info("Computing TSNE")
-    
-    X_embedded = TSNE(n_components=2).fit_transform(X.drop(columns=["Cluster","Network"]))
+    #print("Centroids: " + str(kmeans.cluster_centers_))
 
-    TCs_2d = pd.DataFrame(X_embedded)
-    TCs_2d.columns = ["TC1_2d","TC2_2d"]
-    TCs_2d.to_csv(save_path+'TSNE-WON.csv')
-    
-    X["TC1_2d"] = TCs_2d["TC1_2d"]
-    X["TC2_2d"] = TCs_2d["TC2_2d"]
-    X.to_csv(save_path+'Complete-TSNE-WON.csv')
+    #print("Inertia: "+str(kmeans.inertia_))
 
-    cluster1 = X[X["Cluster"] == 0]
-    cluster2 = X[X["Cluster"] == 1]
-    cluster3 = X[X["Cluster"] == 2]
-    cluster4 = X[X["Cluster"] == 3]
+    #print("Iterations: "+str(kmeans.n_iter_))
 
-    print("C1 Size = "+str(len(cluster1)))
-    print("C2 Size = "+str(len(cluster2)))
-    print("C3 Size = "+str(len(cluster3)))
-    print("C4 Size = "+str(len(cluster4)))
-
-    colors = ["#0396FF","#EA5455","#7367F0","#32CCBC"]
-
-    size = 2.5
-
-    trace1 = go.Scattergl(
-                    x = cluster1["TC1_2d"],
-                    y = cluster1["TC2_2d"],
-                    mode = "markers",
-                    name = "Cluster 1",
-                    marker = dict(color = colors[0], size = size),
-                    text = None)
-
-    trace2 = go.Scattergl(
-                        x = cluster2["TC1_2d"],
-                        y = cluster2["TC2_2d"],
-                        mode = "markers",
-                        name = "Cluster 2",
-                        marker = dict(color = colors[1],size = size),
-                        text = None)
-
-    trace3 = go.Scattergl(
-                        x = cluster3["TC1_2d"],
-                        y = cluster3["TC2_2d"],
-                        mode = "markers",
-                        name = "Cluster 3",
-                        marker = dict(color = colors[2],size = size),
-                        text = None)
-
-    trace4 = go.Scattergl(
-                        x = cluster4["TC1_2d"],
-                        y = cluster4["TC2_2d"],
-                        mode = "markers",
-                        name = "Cluster 4",
-                        marker = dict(color = colors[3],size = size),
-                        text = None)
-
-    data = [trace1, trace2, trace3,trace4]
-
-    title = "Visualizing Clusters in Two Dimensions Using T-SNE"
-
-    layout = dict(title = title,
-                xaxis= dict(title= 'TC1',ticklen= 5,zeroline= False),
-                yaxis= dict(title= 'TC2',ticklen= 5,zeroline= False)
-                )
-
-    fig = go.Figure(dict(data = data, layout = layout))
-
-    fig.write_html(save_path+'TSNE-WON.html')
-
-    msg.good("TSNE Done")
-
-    return True
+    return [clusters,kmeans.inertia_,kmeans.n_iter_]
 
     #---------------------------------------------------------
 
-def UsersHierarchy(read_path,save_path):
-
-    msg.info("Reading Data...")
-    df = pd.read_csv(save_path+"Complete-TSNE-WON.csv")
-    df = df[['Network', 'Cluster']]
-    print(df)
-
-    files = []
-
-    for r, _, f in os.walk(read_path):
-        for file in f:
-            if '.edges.signatures.txt' in file:
-                files.append([os.path.join(r, file),file.replace(".edges.signatures.txt","")])
-    files.sort()
-
-    msg.good("Done")
-
-    msg.info("Computing Embeddings...")
-    embeddings = {}
-    for file in tqdm(range(len(files))):
-        #path = files[file][0]
-        name = files[file][1]
-        network = df[df["Network"] == name]
-        #print(network)
-
-        r1 = len(network[network["Cluster"] == 0])
-        r2 = len(network[network["Cluster"] == 1])
-        r3 = len(network[network["Cluster"] == 2])
-        r4 = len(network[network["Cluster"] == 3])
-
-        embeddings[name] = [r1,r2,r3,r4]
-
-    embeddings = pd.DataFrame.from_dict(embeddings, orient='index')
-
-    embeddings.to_csv(save_path+'Embeddings-WON.csv')
-
-    for column in embeddings.columns:
-        embeddings[column] = MinMaxScaler().fit_transform(embeddings[column].values.reshape(-1, 1))
-
-    print(embeddings)
-
-    embeddings.to_csv(save_path+'EmbeddingsNorm-WON.csv')
-
-    labels = embeddings.index
-
-    msg.good("Embeddings Done")
-    embeddings = np.array(embeddings)
-    #print(embeddings)
-    for method in ['single','complete','average','weighted','centroid','median','ward']:
-        fig = ff.create_dendrogram(embeddings, orientation='left', labels=labels, linkagefun=lambda alpha: hierarchy.linkage(alpha,method=method,optimal_ordering=True))
-        fig.update_layout(autosize=True) 
-        fig.update_layout(height=700) 
-        fig.write_html(save_path+"UsersWON"+"-"+method.upper()+".dendrogram.html")
-
-    return True
-
-
-
-def UsersMiniBatchKMeans(read_path,save_path):
+def GetStabilityEmbedding(read_path,save_path,runs,K):
 
     files = []
 
@@ -243,32 +232,454 @@ def UsersMiniBatchKMeans(read_path,save_path):
         df["Network"] = name
         aux = pd.concat([aux, df])
     
-    print(aux)
     X = aux.drop(columns=["Network"])
     aux = aux["Network"]
 
-    for column in X:
-        X[column] = MinMaxScaler().fit_transform(X[column].values.reshape(-1, 1))
+    X = X.div(X.sum(axis=1), axis=0) #Normalize
 
     msg.good("Preprocessing Done")
 
-    z = np.abs(stats.zscore(X))
+   # z = np.abs(stats.zscore(X))
 
-    XClean = X[(z<4).all(axis=1)]
+    #XClean = X[(z<4).all(axis=1)]
 
-    print("LenX "+str(len(X)))
-    print("LenXClean ="+str(len(XClean)))
-    print("Outliers = "+str(len(X)-len(XClean)))
+    #print("LenX "+str(len(X)))
+    #print("LenXClean ="+str(len(XClean)))
+    #print("Outliers = "+str(len(X)-len(XClean)))
 
-    #TSNE---------------------------------------------------------
+    clusters = []
+    inertias = []
+    iters = []
 
-    kmeans = MiniBatchKMeans(n_clusters=4, n_init=100, init='k-means++',random_state=10,verbose=0,n_jobs=-1)
+    msg.info("Computing MiniBatch")
+
+    for i in tqdm(range(runs)):
+        res =  GetMiniBatchKMeans(X,K)
+        clusters.append(res[0])
+        iters.append(res[2])
+        inertias.append(res[1])
+
+    msg.good("MiniBatch Done")
+
+    NMIs = np.zeros((len(clusters),len(clusters)))
+
+    msg.info("Computing NMIs")
+
+    for i in tqdm(range(len(clusters))):
+        for j in range(i+1):
+            NMIs[i][j] = normalized_mutual_info_score(clusters[i],clusters[j])
+    
+    msg.good("NMI Done")
+
+    name=str(np.random.randint(0,1000))
+
+    msg.info("Plotting...")
+
+    sns.set(font_scale=0.1)
+    sns.heatmap(NMIs, annot=True)
+    plt.savefig(save_path+str(K)+"Embedding-NMIs.svg")
+    plt.clf()
+
+    fig = go.Figure([go.Bar(x=list(range(len(inertias))), y=inertias)])
+
+    fig.write_html(save_path+str(K)+"Embedding-inertias.html")
+    np.savetxt(save_path+str(K)+'Embedding-intertias.out', np.array(inertias), delimiter=',')
+
+    msg.good("Plotting Done")
+
+    nmim = [np.mean(NMIs)]
+    print(nmim)
+
+    np.savetxt(save_path+str(K)+'Embedding-NMIsMean.out', np.array(nmim), delimiter=',')
+
+    #print(NMIs)
+
+    return True
+
+def UsersMiniBatchKMeansEmbedding(read_path,save_path, K,seed=None):
+
+    files = []
+
+    for r, _, f in os.walk(read_path):
+        for file in f:
+            if '.edges.signatures.txt' in file:
+                files.append([os.path.join(r, file),file.replace(".edges.signatures.txt","")])
+    files.sort()
+
+    msg.info("Preprocessing orbits")
+    aux = pd.DataFrame()
+    for file in tqdm(range(len(files))):
+        path = files[file][0]
+        name = files[file][1]
+        df = pd.DataFrame(np.loadtxt(path),index=None)
+        df["Network"] = name
+        aux = pd.concat([aux, df])
+    
+    X = aux.drop(columns=["Network"])
+    aux = aux["Network"]
+
+    X = X.div(X.sum(axis=1), axis=0) #Normalize
+
+    msg.good("Preprocessing Done")
+
+    #z = np.abs(stats.zscore(X))
+
+    #XClean = X[(z<4).all(axis=1)]
+
+    #print("LenX "+str(len(X)))
+    #print("LenXClean ="+str(len(XClean)))
+    #print("Outliers = "+str(len(X)-len(XClean)))
+
+    kmeans = MiniBatchKMeans(n_clusters=K, n_init=500, init='k-means++',random_state=seed,verbose=0)
     kmeans.fit(X)
 
     clusters = kmeans.predict(X)
     X["Cluster"] = clusters
     X["Network"] = aux
+    XS = X[["Network","Cluster"]]
+
+    G = XS.pivot_table(index='Network', columns='Cluster', aggfunc=len,fill_value=0)
+
+    G.to_csv(save_path+str(K)+'-MiniBatchUsersEmbedding.csv')
+
+    msg.good("Clustering Done")
+
+    GNorm = G.div(G.sum(axis=1), axis=0) #Normalize
+    GNorm.to_csv(save_path+str(K)+'-NormMiniBatchUsersEmbedding.csv')
+
+    msg.good("Clustering Saved")
+
+
+    #print("Centroids: " + str(kmeans.cluster_centers_))
+
+    #print("Inertia: "+str(kmeans.inertia_))
+
+    #print("Iterations: "+str(kmeans.n_iter_))
+
+    np.savetxt(save_path+str(K)+'-CentroidsMiniBatchEmbedding.out', kmeans.cluster_centers_, delimiter=',')
 
     return True
 
-    #---------------------------------------------------------
+
+
+##############################################################################################################################
+##############################################################################################################################
+##############################################################################################################################
+##############################################################################################################################
+
+
+
+def OptKClustering(embedding_path, save_path, nrefs=5, maxClusters=12):
+    
+    X = pd.read_csv(embedding_path)
+    nets = X["Network"]
+    X = X.drop(columns=["Network"])
+
+    X = X.to_numpy(dtype=np.float64)
+
+    msg.good("Loading.. Done")
+
+    #Finding-K---------------------------------------------------------
+
+    msg.info("Computing Distortion")
+    model = KMeans()
+    visualizer = KElbowVisualizer(model, k=(2,maxClusters),metric='distortion',timings = True)
+    visualizer.fit(X)        
+    visualizer.show()        
+    plt.savefig(save_path+"Cluster-Distortion-Kusers"+".svg")
+    msg.good("Elbow Done")
+    plt.clf()
+
+    msg.info("Computing Silhouette")
+    model = KMeans()
+    visualizer = KElbowVisualizer(model, k=(2,maxClusters),metric='silhouette', timings = True)
+    visualizer.fit(X)
+    visualizer.show()  
+    plt.savefig(save_path+"Cluster-Silhouette-Kusers"+".svg")
+    msg.good("Silhouette Done")
+    plt.clf()
+
+    msg.info("Computing CalinskiHarabasz")
+    model = KMeans()
+    visualizer = KElbowVisualizer(model, k=(2,maxClusters),metric='calinski_harabasz', timings = True)
+    visualizer.fit(X)
+    visualizer.show()  
+    plt.savefig(save_path+"Cluster-CalinskiHarabasz-Kusers"+".svg")
+    msg.good("CalinskiHarabasz Done")
+    plt.clf()
+
+
+    """
+
+    gaps = np.zeros((len(range(1, maxClusters)),))
+    resultsdf = pd.DataFrame({'clusterCount':[], 'gap':[]})
+    msg.info("Computing GAP Stats")
+    for gap_index, k in enumerate(tqdm(range(1, maxClusters))):
+
+        # Holder for reference dispersion results
+        refDisps = np.zeros(nrefs)
+
+        # For n references, generate random sample and perform kmeans getting resulting dispersion of each loop
+        for i in range(nrefs):
+            
+            # Create new random reference set
+            randomReference = np.random.random_sample(size=X.shape)
+            
+            # Fit to it
+            km = MiniBatchKMeans(k)
+            km.fit(randomReference)
+            
+            refDisp = km.inertia_
+            refDisps[i] = refDisp
+
+        # Fit cluster to original data and create dispersion
+        km = MiniBatchKMeans(k)
+        km.fit(X)
+
+        origDisp = km.inertia_
+
+        # Calculate gap statistic
+        gap = np.log(np.mean(refDisps)) - np.log(origDisp)
+
+        # Assign this loop's gap statistic to gaps
+        gaps[gap_index] = gap
+
+        resultsdf = resultsdf.append({'clusterCount':k, 'gap':gap}, ignore_index=True)
+
+    KO = gaps.argmax() + 1 
+
+    plt.grid(True)
+    plt.plot(resultsdf['clusterCount'], resultsdf['gap'], linestyle='--', marker='o', color='b');
+    plt.xlabel('K');
+    plt.ylabel('GAP Statistic');
+    plt.title('Optimal K Found in K = ' + str(KO));
+    plt.savefig(save_path+"GAP-Kusers.svg")
+    plt.clf()
+    """
+
+    optimalK = OptimalK(parallel_backend='joblib',n_jobs=32)
+
+    optimalK(X, cluster_array=np.arange(2, maxClusters))
+
+    plt.plot(optimalK.gap_df.n_clusters, optimalK.gap_df.gap_value, linewidth=3)
+    plt.scatter(
+        optimalK.gap_df[optimalK.gap_df.n_clusters == optimalK.n_clusters].n_clusters,
+        optimalK.gap_df[optimalK.gap_df.n_clusters == optimalK.n_clusters].gap_value,
+        s=250,
+        c="r",
+    )
+    plt.grid(True)
+    plt.xlabel("Cluster Count")
+    plt.ylabel("Gap Stats")
+    plt.title("Gap Stats by Cluster Count")
+    plt.savefig(save_path+"Cluster-GAPStats-Kusers.svg")
+    plt.clf()
+
+    # diff plot
+    plt.plot(optimalK.gap_df.n_clusters, optimalK.gap_df["diff"], linewidth=3)
+    plt.grid(True)
+    plt.xlabel("Cluster Count")
+    plt.ylabel("Diff Value")
+    plt.title("Diff Values by Cluster Count")
+    plt.savefig(save_path+"Cluster-GAPDiff-Kusers.svg")
+    plt.clf()
+
+
+    # Gap* plot
+    #max_ix = optimalK.gap_df[optimalK.gap_df["gap*"] == optimalK.gap_df["gap*"].max()].index[0]
+    #plt.plot(optimalK.gap_df.n_clusters, optimalK.gap_df["gap*"], linewidth=3)
+    #plt.scatter(
+    #    optimalK.gap_df.loc[max_ix]["n_clusters"],
+    #    optimalK.gap_df.loc[max_ix]["gap*"],
+    #    s=250,
+    #    c="r",
+    #)
+    
+    #plt.grid(True)
+    #plt.xlabel("Cluster Count")
+    #plt.ylabel("Gap* Stats")
+    #plt.title("Gap* Stats by Cluster Count")
+    #plt.savefig(save_path+"GAP*Stats-Kusers.svg")
+    #plt.clf()
+
+
+    # diff* plot
+    #plt.plot(optimalK.gap_df.n_clusters, optimalK.gap_df["diff*"], linewidth=3)
+    #plt.grid(True)
+    #plt.xlabel("Cluster Count")
+    #plt.ylabel("Diff* Value")
+    #plt.title("Diff* Values by Cluster Count")
+    #plt.savefig(save_path+"GAP*Diff-Kusers.svg")
+    #plt.clf()
+
+    return True # Plus 1 because index of 0 means 1 cluster is optimal, index 2 = 3 clusters are optimal
+
+def GetStabilityClustering(embedding_path,save_path,runs,K):
+
+    X = pd.read_csv(embedding_path)
+    nets = X["Network"]
+    X = X.drop(columns=["Network"])
+
+    X = X.to_numpy(dtype=np.float64)
+
+    msg.good("Loading.. Done")
+
+   # z = np.abs(stats.zscore(X))
+
+    #XClean = X[(z<4).all(axis=1)]
+
+    #print("LenX "+str(len(X)))
+    #print("LenXClean ="+str(len(XClean)))
+    #print("Outliers = "+str(len(X)-len(XClean)))
+
+    clusters = []
+    inertias = []
+    iters = []
+
+    msg.info("Computing MiniBatch")
+
+    for i in tqdm(range(runs)):
+        res =  GetMiniBatchKMeans(X,K)
+        clusters.append(res[0])
+        iters.append(res[2])
+        inertias.append(res[1])
+
+    msg.good("MiniBatch Done")
+
+    NMIs = np.zeros((len(clusters),len(clusters)))
+
+    msg.info("Computing NMIs")
+
+    for i in tqdm(range(len(clusters))):
+        for j in range(i+1):
+            NMIs[i][j] = normalized_mutual_info_score(clusters[i],clusters[j])
+    
+    msg.good("NMI Done")
+
+    name=str(np.random.randint(0,1000))
+
+    msg.info("Plotting...")
+
+    sns.set(font_scale=0.1)
+    sns.heatmap(NMIs, annot=True)
+    plt.savefig(save_path+str(K)+"Clustering-NMIs.svg")
+
+    #print(inertias)
+
+    plt.clf()
+
+    fig = go.Figure([go.Bar(x=list(range(len(inertias))), y=inertias)])
+
+    fig.write_html(save_path+str(K)+"Clustering-inertias.html")
+    np.savetxt(save_path+str(K)+'Clustering-intertias.out', np.array(inertias), delimiter=',')
+
+    msg.good("Plotting Done")
+
+    #print(NMIs)
+
+    return True
+
+def UsersMiniBatchKMeansClustering(embedding_path,save_path, K,seed=None):
+
+    X = pd.read_csv(embedding_path)
+    nets = X["Network"]
+    X = X.drop(columns=["Network"])
+
+    #X = X.to_numpy(dtype=np.float64)
+
+    msg.good("Loading.. Done")
+
+    kmeans = MiniBatchKMeans(n_clusters=K, n_init=2000, init='k-means++',random_state=seed,verbose=0)
+    kmeans.fit(X)
+
+    clusters = kmeans.predict(X)
+
+    X["Network"] = nets
+    X["Cluster"] = clusters
+
+    X.to_csv(save_path+str(K)+'-MiniBatchUsersClustering.csv')
+
+    #print("Centroids: " + str(kmeans.cluster_centers_))
+
+    #print("Inertia: "+str(kmeans.inertia_))
+
+    #print("Iterations: "+str(kmeans.n_iter_))
+
+    np.savetxt(save_path+str(K)+'-CentroidsMiniBatchClustering.out', kmeans.cluster_centers_, delimiter=',')
+
+    return True
+
+
+def UsersDendrogramClustering(embedding_path,save_path,name=""):
+
+    X = pd.read_csv(embedding_path)
+    labels = X["Network"].to_numpy()
+    X = X.drop(columns=["Network"])
+    X = X.to_numpy(dtype=np.float64)
+
+    msg.good("Loading Done")
+
+    msg.info("Computing Distances")
+
+    SD = ssd.squareform(ssd.pdist(X,metric='cosine'))
+
+    sns.set(font_scale=0.1)
+    sns.heatmap(SD, annot=True)
+    plt.savefig(save_path+name+"DendrogramDistances-UsersClustering.svg")
+    plt.clf()
+
+    msg.good("Distances Done")
+
+    msg.info("Computing Dendrograms")
+
+    for method in ['single','complete','average','weighted','centroid','median','ward']:
+        fig = ff.create_dendrogram(X, orientation='left', labels=labels, distfun=lambda alpha: ssd.pdist(alpha,metric='cosine'),linkagefun=lambda alpha: h.linkage(alpha,method=method,optimal_ordering=True))
+        fig.layout.width = 1256
+        fig.layout.height = 1256
+        fig.write_image(save_path+name+"UsersClustering-Dendrogram-"+method+".svg")
+
+    msg.good("Dengrograms Done")
+
+    return True
+
+##############################################################################################################################
+##############################################################################################################################
+##############################################################################################################################
+##############################################################################################################################
+
+def ViewNetworks(embedding_path,save_path):
+
+    colorscale = py.colors.sequential.Rainbow
+
+    X = pd.read_csv(embedding_path)
+
+    fig1 = px.scatter_3d(X, x='0', y='1', z='2',color='Cluster',hover_name='Network',color_continuous_scale=colorscale)
+    fig1.write_html(save_path+"3D-Networks-Viz.html")
+
+    labels = X["Network"]
+    clusters = X["Cluster"]
+
+    X = X.drop(columns=["Network","Cluster"])
+
+    X_embedded = TSNE(n_components=2).fit_transform(X)
+
+    X_embedded = pd.DataFrame(X_embedded)
+
+    X_embedded["Network"] = labels
+    X_embedded["Cluster"] = clusters
+
+    #print(X_embedded)
+
+    fig2 = px.scatter(X_embedded, x=0, y=1 ,color='Cluster',hover_name='Network',color_continuous_scale=colorscale)
+    fig2.update_traces(marker=dict(size=20))
+    fig2.write_html(save_path+"2D-Networks-Viz.html")
+
+def AuditCentroids(centroids_path):
+
+    X = np.loadtxt(centroids_path,delimiter=",")
+    for c in X:
+        aux = sorted(enumerate(c),reverse=True, key=lambda x:x[1])
+        print(aux)
+
+    #sort(enumerate(fila),reverse=True, key=lambda x:x[1])
+
