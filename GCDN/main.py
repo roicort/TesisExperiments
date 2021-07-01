@@ -1,10 +1,10 @@
 from wasabi import msg
 from preprocessing import graph2edges
 from runner import parallelrunnerGC, runnerdistances
-from clustering_distances import DistanceHierarchy, DistanceKMedoids
-from clustering_graphlets import GraphletKMeans, GraphletHierarchy
+#from clustering_distances import DistanceHierarchy, DistanceKMedoids
+#from clustering_graphlets import GraphletKMeans, GraphletHierarchy
 from clustering_users import UsersMiniBatchKMeansEmbedding, GetStabilityEmbedding, OptKEmbedding, OptKClustering, AuditCentroids
-from clustering_users import GetStabilityClustering, UsersMiniBatchKMeansClustering, UsersDendrogramClustering, ViewNetworks
+from clustering_users import GetStabilityClustering, UsersMiniBatchKMeansClustering, UsersDendrogramClustering, ViewNetworks, ColorNetworks
 import shutil
 
 from correlations import GraphletCorrelations
@@ -104,3 +104,7 @@ if GetStabilityEmbedding("input/","stability/",runs=50,K=5):
 #ViewNetworks("users/4-MiniBatchUsersClustering.csv","users/")
 
 #AuditCentroids("users/3-CentroidsMiniBatchEmbedding.out")
+
+#ColorNetworks("input/","users/5-CompleteMiniBatchUsers.csv","colored/")
+
+

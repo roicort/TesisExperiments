@@ -23,6 +23,8 @@ import scipy.spatial.distance as ssd
 import scipy.stats as stats
 from scipy.cluster import hierarchy as h
 
+import networkx as nx
+
 from sklearn.metrics.cluster import normalized_mutual_info_score
 
 from gap_statistic import OptimalK
@@ -336,8 +338,10 @@ def UsersMiniBatchKMeansEmbedding(read_path,save_path, K,seed=None):
     clusters = kmeans.predict(X)
     X["Cluster"] = clusters
     X["Network"] = aux
-    XS = X[["Network","Cluster"]]
 
+    print(X)
+
+    XS = X[["Network","Cluster"]]
     G = XS.pivot_table(index='Network', columns='Cluster', aggfunc=len,fill_value=0)
 
     G.to_csv(save_path+str(K)+'-MiniBatchUsersEmbedding.csv')
@@ -349,6 +353,7 @@ def UsersMiniBatchKMeansEmbedding(read_path,save_path, K,seed=None):
 
     msg.good("Clustering Saved")
 
+    XS.to_csv(save_path+str(K)+'-CompleteMiniBatchUsers.csv')
 
     #print("Centroids: " + str(kmeans.cluster_centers_))
 
@@ -683,3 +688,50 @@ def AuditCentroids(centroids_path):
 
     #sort(enumerate(fila),reverse=True, key=lambda x:x[1])
 
+def ColorNetworks(read_path,users_path,save_path):
+
+    files = []
+
+    for r, _, f in os.walk(read_path):
+        for file in f:
+            if '.edges.dictionary.txt' in file:
+                files.append([os.path.join(r, file),file.replace(".edges.dictionary.txt","")])
+    files.sort()
+
+    msg.info("Preprocessing Dicts")
+
+    X = pd.read_csv(users_path)
+    X.columns =['Key','Network','Cluster']
+
+    msg.info("Parsing...")
+
+    for file in tqdm(range(len(files))):
+        path = files[file][0]
+        name = files[file][1]
+
+        dt = pd.read_csv(path,header= None,sep = " ")
+        dt.columns =['Index','Values']
+        dictionary = pd.Series(dt["Values"].values,index=dt["Index"]).to_dict()
+
+        #print(dt)
+        #print(dictionary)
+
+        Net = X.loc[X['Network'] == name]
+        Net['Value']= Net['Key'].map(dictionary)
+
+        #print(Net)
+
+        clusterdict = pd.Series(Net["Cluster"].values,index=Net["Value"]).to_dict()
+
+        #print(clusterdict)
+
+        edges = pd.read_csv(path.replace(".dictionary.txt",""),header= None,sep = " ")
+        edges.columns =['Source','Target']
+
+        G=nx.from_pandas_edgelist(edges, "Source", "Target",create_using=nx.DiGraph())
+        
+        nx.set_node_attributes(G, clusterdict, name="Cluster")
+
+        nx.write_gexf(G, save_path+name+".gexf") 
+
+    msg.good("Done")
