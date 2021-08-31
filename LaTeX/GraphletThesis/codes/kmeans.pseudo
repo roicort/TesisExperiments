@@ -1,0 +1,13 @@
+
+Input: Puntos y K
+Output: K Grupos
+
+Inicializar K Centroides y K Grupos \cite{kubat_introduction_2017}
+repetir:
+    Escoger un punto $X$ y calcular su distancia a cada Centroide $C_i$
+    Notar el centroide más cercano como $C_j$
+    Sí $X$ se encuentra en $C_j$ no hacer nada.
+    De otra manera mover $X$ a $C_j$ y recalcular los centroides.
+hasta:
+    Para cuando los Centroides no cambien de manera significativa
+    O se haya alcanzado un número máximo de iteraciones

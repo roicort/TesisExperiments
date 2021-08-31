@@ -1,0 +1,67 @@
+\chapter{Introducción}
+\label{sec:intro}
+
+La aplicación de aprendizaje no supervisado para el agrupamiento (Clustering) de nodos en una red es un problema que ha sido estudiado ampliamente, la agrupación de redes completas por otro lado, es un problema que no se ha explorado ampliamente debido a la complejidad de hacer una comparación entre distintas redes. Recientemente el concepto de roles de nodos ha sido propuesto junto a sus características topológicas para estudiar distintas redes. En este trabajo se propone una metodología para realizar un agrupamiento de redes temáticas de Twitter utilizando aprendizaje no supervisado mediante una caracterización de las redes utilizando Órbitas para identificar roles estructurales de los usuarios dentro de la red.
+
+
+\section{Sobre Twitter}
+\label{sec:organización}
+
+Twitter es un servicio de microblogging y red social en la que los usuarios publican e interactúan con posts conocidos como “Tweets". \cite{twitter} Un Tweet es la unidad minima de Twitter, se trata de un mensaje de hasta 280 caracteres, son públicamente visibles por defecto y cualquier usuario puede responder a los demás creando de esta manera una discusión pública y por lo tanto una red dirigida.
+
+La forma en que se propaga la información en Twitter refleja cómo es que se propaga la información en la vida real. Las comunicaciones humanas normalmente se caracterizan por una asimetría entre los productores de información (medios de comunicación, influencers, etc.) y los consumidores de contenidos. \cite{gabielkov_studying_2014} Por lo tanto, entender los roles de los usuarios que propagan información en la red esta correlacionada con la topología de la misma, es decir, de la discusión pública.
+
+\paragraph{Trending Topics}
+
+Twitter hace un seguimiento de las frases, palabras y hashtags que se mencionan con mayor frecuencia y los publica bajo el título de "Trending Topic". Un hashtag es una etiqueta por convención entre los usuarios de Twitter para crear y seguir un hilo de discusión prefijando una palabra con el carácter “\#”. Los Trending Topics ayudan a Twitter y a sus usuarios a entender lo que está ocurriendo en el mundo y cuáles son las opiniones de la gente al respecto. \cite{twitter}
+
+\paragraph{Interacciones}
+
+Las mayor parte de las interacciones dentro de Twitter responden a la práctica común de responder o reaccionar a un tweet. \cite{kwak_what_2010} Las más comunes están definidas por las siguientes acciones: 
+
+RT que significa “retweet" es la practica de replicar el tuit de otro usuario. El mecanismo de retuits permite a los usuarios difundir la información que deseen mas allá del alcance de los seguidores del tuit original.
+
+ ‘@‘ seguido de un identificador (username) se refiere a una mención y se utiliza para etiquetar y responder directamente a un usuario.
+
+
+\subsection{¿Por qué es importante estudiar Twitter?}
+\label{sec:intro:results:refs:method}
+{
+La forma en que se propaga la información en Twitter se asemeja a cómo se propaga la información en la vida real. Las comunicaciones humanas suelen caracterizarse por una asimetría entre los productores de información (medios de comunicación, empresas, personas influyentes, entre otros) y los consumidores de contenidos \cite{gabielkov_studying_2014}. El papel de los usuarios en la propagación de la información a través de la red está intrínsecamente relacionado con la topología de la misma. Entender estos roles puede proporcionar una valiosa visión de los debates públicos en la plataforma. 
+}
+
+
+\section{Presentación del problema y objetivos}
+\label{sec:intro:motivación}
+{
+Dada una colección de grafos de Twitter definida por la interacción de los usuarios sobre temas concretos, nuestro objetivo es identificar grupos dentro de la colección según el tipo y el número de usuarios que muestran un perfil determinado en la conversación. 
+
+El agrupamiento de una colección de grafos no es un problema sencillo. El uso de algoritmos de agrupación populares, como K-Means, requiere incrustar los gráficos en un espacio vectorial. Esta tarea puede llevarse a cabo mediante métodos que van desde la extracción de características hasta incrustaciones más sofisticadas generadas a través de redes neuronales; entre ellas, se han propuesto graphlets para capturar la topología general de la red \cite{sarajlic_graphlet-based_2016}.
+
+Más adelante haré una breve comprensión del panorama y el estado del arte de los métodos anteriormente mencionados.
+}
+
+%
+%\begin{lstlisting}[language=Python, caption={This is a bubble sort function.}\label{lst:pybubblesort}]
+%#!/usr/bin/env python
+%def bubble_sort(list):
+%    for num in range(len(list)-1,0,-1):
+%        for i in range(num):
+%            if list[i]>list[i+1]:
+%                tmp = list[i]
+%                list[i] = list[i+1]
+%                list[i+1] = tmp
+
+%alist = [34,67,2,4,65,16,17,95,20,31]
+%bubble_sort(list)
+%print(list)
+%\end{lstlisting}%
+
+\section{Metodología}
+\label{sec:intro:organización}
+
+Priorizando la interpretación de los resultados, proponemos una representación de las redes temáticas basada en el perfil de sus usuarios. Los perfiles, a su vez, se construyen utilizando la firma de la órbita asignada a cada nodo en un análisis de la red basado en grafos. 
+
+Nuestro enfoque cumple un doble propósito. En primer lugar, proporciona un método para agrupar las redes de Twitter de forma explicable, capturando las diferencias entre ellas que van más allá de las métricas generales de la red. En segundo lugar, produce una caracterización de los usuarios de la red que puede ayudar a comprender la estructura, las relaciones y los patrones latentes creados por la compleja dinámica de Twitter. 
+
+Demostramos la utilidad de nuestro análisis explorando 75 redes reales asociadas a los trending topics de Twitter durante 2020 y discutiendo los diferentes perfiles de usuarios encontrados en el proceso en términos de los patrones de comportamiento sugeridos por sus componentes.
