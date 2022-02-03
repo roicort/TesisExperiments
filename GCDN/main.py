@@ -1,10 +1,10 @@
 from wasabi import msg
 from preprocessing import graph2edges
 from runner import parallelrunnerGC, runnerdistances
-#from clustering_distances import DistanceHierarchy, DistanceKMedoids
-#from clustering_graphlets import GraphletKMeans, GraphletHierarchy
-from clustering_users import UsersMiniBatchKMeansEmbedding, GetStabilityEmbedding, OptKEmbedding, OptKClustering, AuditCentroids
-from clustering_users import GetStabilityClustering, UsersMiniBatchKMeansClustering, UsersDendrogramClustering, ViewNetworks, ColorNetworks
+#from clustering_graphlet_distances import DistanceHierarchy, DistanceKMedoids
+#from clustering_graphlet_counts import GraphletKMeans, GraphletHierarchy
+from clustering_users_orbits import UsersMiniBatchKMeansEmbedding, GetStabilityEmbedding, OptKEmbedding, OptKClustering, AuditCentroids
+from clustering_users_orbits import GetStabilityClustering, UsersMiniBatchKMeansClustering, UsersDendrogramClustering, ViewNetworks, ColorNetworks
 import shutil
 
 from correlations import GraphletCorrelations
@@ -73,27 +73,31 @@ if runnerdistances('input/','logs/',method = "DGDDA",threads = 32):
 
 ########################################################################
 
-#ByUsers
+#By User Caracterization using OrbitalSignature
 
-#if OptKEmbedding("input/","stability/"):
-#    msg.good("GAP Done")
+## First Clustering (Users Caracterization)
+
+if OptKEmbedding("input/","stability/"):
+    msg.good("GAP Done")
 
 if GetStabilityEmbedding("input/","stability/",runs=50,K=5):
     msg.good("Embedding Stability Done")
 
-#if UsersMiniBatchKMeansEmbedding("input/","users/",K=5):
-#    msg.good("KMeans Embedding Done!")
+if UsersMiniBatchKMeansEmbedding("input/","users/",K=5):
+    msg.good("KMeans Embedding Done!")
 
-#OptKClustering("users/5-MiniBatchUsersEmbedding.csv","stability/")
+## Second Clustering (Graph Clustering)
 
-#if GetStabilityClustering("users/4-MiniBatchUsersEmbedding.csv","stability/",runs=50,K=3):
-#    msg.good("NetworkClustering Stability Done")
+OptKClustering("users/5-MiniBatchUsersEmbedding.csv","stability/")
 
-#UsersDendrogramClustering("users/5-MiniBatchUsersEmbedding.csv","users/")
+if GetStabilityClustering("users/4-MiniBatchUsersEmbedding.csv","stability/",runs=50,K=3):
+    msg.good("NetworkClustering Stability Done")
 
-#UsersDendrogramClustering("users/5-NormMiniBatchUsersEmbedding.csv","users/", name = "Norm")
+UsersDendrogramClustering("users/5-MiniBatchUsersEmbedding.csv","users/")
 
-#UsersMiniBatchKMeansClustering("users/5-MiniBatchUsersEmbedding.csv","users/", K=5)
+UsersDendrogramClustering("users/5-NormMiniBatchUsersEmbedding.csv","users/", name = "Norm")
+
+UsersMiniBatchKMeansClustering("users/5-MiniBatchUsersEmbedding.csv","users/", K=5)
 
 ########################################################################
 
